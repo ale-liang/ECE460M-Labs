@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 02/08/2023 04:05:39 PM
+// Create Date: 02/14/2023 04:46:38 PM
 // Design Name: 
-// Module Name: top
+// Module Name: BinToBCD
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,11 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module top(
-    input St,
-    input Clk,
-    input Rst,
-    input [1:0] Sel,
-    output [6:0] SevSegDsp
+module BinToBCD(
+
     );
 endmodule
