@@ -28,10 +28,11 @@ module PulseGen(
     );
     
     wire Sec;
-    reg pulseGen;
+    reg pulseGen = 0;
     reg [8:0] secCnt;
     
-    reg [21:0] cnt, PulsePerSecCnt, PrevPulsePerSecCnt;
+    reg [21:0] cnt, PulsePerSecCnt;
+    reg [21:0] PrevPulsePerSecCnt = 0;
     
     
     assign PulseOut = pulseGen;
@@ -79,15 +80,18 @@ module PulseGen(
         if(PulsePerSecCnt != PrevPulsePerSecCnt) begin
             cnt = 1;
             PrevPulsePerSecCnt = PulsePerSecCnt;
-        end else begin
+        end 
+        else begin
             if(St & (PulsePerSecCnt != 0)) begin
                 if(cnt == PulsePerSecCnt) begin
                     pulseGen = ~pulseGen;
                     cnt = 0;
-                end    
-                end else begin
+                end 
+                else begin
                     cnt = cnt + 1;
-                end
-         end                
+                end   
+            end 
+            
+        end                
     end
 endmodule

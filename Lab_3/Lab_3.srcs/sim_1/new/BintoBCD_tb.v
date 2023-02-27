@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 02/08/2023 04:05:39 PM
+// Create Date: 02/26/2023 04:37:46 PM
 // Design Name: 
-// Module Name: top
+// Module Name: BintoBCD_tb
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -19,23 +19,29 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module top(
-    input START,
-    input CLK,
-    input RESET,
-    input [1:0] MODE,
-    output SI,
-    output [3:0] ANODE,
-    output [7:0] SEVSEG
-    );
+
+module BintoBCD_tb;
+    reg [15:0] Bin;
+    wire [15:0] BCD;
     
-    wire POUT; 
-    wire [15:0] DOUT;
-    wire DMILES;
+    integer i;
     
-    PulseGen PG (START, MODE, CLK, POUT);
-    FitbitTracker FT (START, CLK, POUT, RESET, DOUT, SI, DMILES);
-    Display DM (DOUT, CLK, RESET, DMILES, ANODE, SEVSEG);
+    localparam period = 32;
     
+    BinToBCD UUT (.Bin(Bin), .BCD(BCD));
+
+    initial
+    begin
+        Bin = 9999;
+    end
     
+    always @(*)
+    begin
+        //S0
+        #period;
+        
+                
+        $display("finished test");
+    $stop;
+    end
 endmodule

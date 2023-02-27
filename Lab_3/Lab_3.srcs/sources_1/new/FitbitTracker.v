@@ -21,6 +21,7 @@
 
 
 module FitbitTracker(
+    input St,
     input Clk,
     input Pulse,
     input Rst,
@@ -132,7 +133,10 @@ module FitbitTracker(
             distCovered = 0;
         end
         else begin    
-            distCovered = stepCnt >> 10;
+            distCovered = (stepCnt >> 11)*10;
+            if (((stepCnt >> 10) % 2) == 1) begin
+                distCovered = distCovered + 5;
+            end
         end
     end
     
@@ -144,7 +148,7 @@ module FitbitTracker(
         end
         else begin
             if (nineSecCnt < 9) begin
-                if (stepsPerSec > 32) begin
+                if ((stepsPerSec > 32) && St) begin
                     numSecsOver32 = numSecsOver32 + 1;
                 end
                 nineSecCnt = nineSecCnt + 1;
@@ -162,7 +166,7 @@ module FitbitTracker(
     else begin
         if(timeAbove64Cnt < 60) begin
             passed1Min = 0;
-            if(stepsPerSec > 63) begin
+            if((stepsPerSec > 63) && St) begin
                 timeAbove64Cnt = timeAbove64Cnt + 1;
             end    
             else begin
@@ -170,7 +174,7 @@ module FitbitTracker(
             end    
         end            
         else begin
-            if(stepsPerSec > 63) begin
+            if((stepsPerSec > 63) && St) begin
                 if(!passed1Min) begin
                     timeAbove64Dsp = timeAbove64Cnt + timeAbove64Dsp;
                     passed1Min = 1;
@@ -232,6 +236,3 @@ end
     end
     
 endmodule
-
-
-
