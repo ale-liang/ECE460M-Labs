@@ -51,12 +51,12 @@ module FiftyMilliSecClk(
     output slowClk
     );
     
-    parameter FiftyMilliSecCnt = 5000000;
+    parameter FiftyMilliSecCnt = 2500000;
     
     reg [24:0] cnt = 0;
     reg slowClkReg = 0;
     assign slowClk = slowClkReg;
-    
+    //Flips slow clk value every 25 ms, so posedge every 50 ms
     always@( posedge clk) begin
         if(cnt == FiftyMilliSecCnt) begin
             slowClkReg <= ~slowClkReg;
