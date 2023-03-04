@@ -26,9 +26,9 @@ module ButtonDebounce(
     output PB_Out
     );
     
-    reg r1, r2, r3;
+    reg r1, r2, r3 = 0;
     wire slowClk;
-    FiftyMilliSecClk(clk, slowClk);
+    FiftyMilliSecClk s1(clk, slowClk);
 
     always @(posedge slowClk)
         begin
@@ -41,7 +41,7 @@ module ButtonDebounce(
         r2 <= r1;
         end
          
-    assign PB_Out = !r3 & r2;
+    assign PB_Out = ~r3 & r2;
     
     
 endmodule
