@@ -34,7 +34,7 @@ module Controller(
     );
     
     //Registers for tracking each second
-    parameter secPeriod = 100;
+    parameter secPeriod = 100000000;
     reg [25:0] cnt = 0;
     
     //Wire variables for output of debounced buttons
@@ -44,6 +44,7 @@ module Controller(
     reg [15:0] TimeLeftCntReg = 0;
     reg LessThan200Reg = 0;
     reg ZeroTimeLeftReg = 1;
+    wire slowClk;
     
     //Assign output to registers
     assign TimeLeftCnt = TimeLeftCntReg;
@@ -57,7 +58,9 @@ module Controller(
     ButtonDebounce bR(Clk, ButtR, R);
     ButtonDebounce bD(Clk, ButtD, D);
     
-    always@(posedge Clk) begin
+    FiftyMilliSecClk f1(Clk, slowClk);
+    
+    always@(*) begin
         if(TimeLeftCntReg < 200) begin
             LessThan200Reg <= (TimeLeftCntReg == 0) ? 0:1;
             ZeroTimeLeftReg <= (TimeLeftCntReg == 0 ) ? 1:0;
@@ -67,10 +70,10 @@ module Controller(
         end    
     end
     
-    always @(posedge Clk) begin
+    always @(posedge slowClk) begin
         //Decrements if cnt == secPeriod (which means a second has passed)
         //and also updates the outputs
-        if (cnt == secPeriod) begin
+        if (cnt == 20) begin
                 //Checks if Time left on Parking meter is Greater than 0
                 //If true, decrement and set proper outputs
                 //Else, time is 0 and no decrement
@@ -89,14 +92,10 @@ module Controller(
             //if SWITCH 0 is on, then display is stuck at 10 until switch 0 is off
             if(Sw0) begin
                 TimeLeftCntReg <= 10;
-                LessThan200Reg <= 1'b1;
-                ZeroTimeLeftReg <= 1'b0;
             end
             //if SWITCH 1 is on, then display is stuck at 205 until switch is off
             else if (Sw1) begin
                 TimeLeftCntReg <= 205;
-                LessThan200Reg <= 1'b0;
-                ZeroTimeLeftReg <= 1'b0;
             end 
             //Else decrement as normal and check if any of the buttons have been pressed
             //and increment according to button pressed
@@ -128,3 +127,24 @@ module Controller(
     
 endmodule
 
+module FiftyMilliSecClk(
+    input clk,
+    output slowClk
+    );
+    
+    parameter FiftyMilliSecCnt = 2500000;
+    
+    reg [24:0] cnt = 0;
+    reg slowClkReg = 0;
+    assign slowClk = slowClkReg;
+    //Flips slow clk value every 25 ms, so posedge every 50 ms
+    always@( posedge clk) begin
+        if(cnt == FiftyMilliSecCnt) begin
+            slowClkReg <= ~slowClkReg;
+            cnt <= 0;
+        end
+        else
+            cnt = cnt + 1;
+    end
+    
+endmodule
