@@ -36,13 +36,14 @@ module Display(
     wire [6:0] S3;
    
     reg off = 0;
-    reg [19:0] count;
-    reg [25:0] secCnt;
+    reg [10:0] smallcnt = 0;
+    reg [19:0] count = 0;
+    reg [20:0] secCnt = 0;
     reg [3:0] ANODEreg;
     reg [7:0] SEVSEGreg;
     
-    parameter Second = 100000000;
-    parameter halfSecond = 50000000;
+    parameter Second = 100000;
+    parameter halfSecond = 50000;
     
     assign ANODE = ANODEreg;
     assign SEVSEG = SEVSEGreg;
@@ -50,27 +51,37 @@ module Display(
     BCDto7Seg (BCD, S0, S1, S2, S3);
     
     always @(posedge CLK)
-    begin
-        if (ZEROTIME)
-            if (secCnt >= halfSecond) begin
-                off <= ~off;
-                secCnt <= 0;
-            end
-        else if (LESSTHAN200 && secCnt >= Second) begin
-                off <= ~off;
-                secCnt <= 0;
-            end
-    end
-    
-    always @(posedge CLK or posedge SW0 or posedge SW1)
     begin 
+        count = count + 1;
         if ((SW0 || SW1) == 1) begin
-            count <= 0;
-            secCnt <= 0;
+            secCnt <= 1;
+            smallcnt <= 1;
         end
         else begin
-            count <= count + 1;
-            secCnt <= secCnt + 1;
+            if((LESSTHAN200 == 0) && (ZEROTIME == 0)) begin
+                off <= 0;
+                secCnt <= 1;
+                smallcnt <= 1;
+             end else begin
+                smallcnt = smallcnt + 1;
+                if (smallcnt == 1000) begin
+                    secCnt = secCnt + 1;
+                    smallcnt <= 1;
+                end
+                if (ZEROTIME) begin
+                    if (secCnt >= halfSecond) begin
+                        off <= ~off;
+                        secCnt <= 1;
+                        smallcnt <= 1;
+                    end
+                end else begin
+                    if (LESSTHAN200 && (secCnt >= Second)) begin
+                        off <= ~off;
+                        secCnt <= 1;
+                        smallcnt <= 1;
+                    end
+                end
+             end
         end
     end 
     

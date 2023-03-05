@@ -37,7 +37,7 @@ module top(
     wire TWOHUND, ZERO;
     
     Controller CTL (CLK, BUTU, BUTL, BUTR, BUTD, SW0, SW1, DISPTIME, TWOHUND, ZERO);
-    BinToBCD(DISPTIME, DOUT);
+    BinToBCD CVT (DISPTIME, DOUT);
     Display DSP (CLK, SW0, SW1, DOUT, TWOHUND, ZERO, ANODE, SEVSEG);
     
 endmodule

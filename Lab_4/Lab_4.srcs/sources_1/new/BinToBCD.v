@@ -20,20 +20,21 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-`define B0 BCD[3:0]
-`define B1 BCD[7:4]
-`define B2 BCD[11:8]
-`define B3 BCD[15:12]
+`define B0 BCD_reg[3:0]
+`define B1 BCD_reg[7:4]
+`define B2 BCD_reg[11:8]
+`define B3 BCD_reg[15:12]
 
 module BinToBCD(
     input[15:0] Bin,
     output [15:0] BCD 
     );
     
-    reg [15:0] Breg;
-    reg [15:0] BCD;
+    reg [15:0] BCD_reg;
     
     integer DEC;
+    
+    assign BCD = BCD_reg;
  
     always @(Bin)
     begin
