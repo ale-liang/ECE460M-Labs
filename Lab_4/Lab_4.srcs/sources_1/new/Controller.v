@@ -34,7 +34,6 @@ module Controller(
     );
     
     //Registers for tracking each second
-    parameter secPeriod = 100000000;
     reg [25:0] cnt = 0;
     
     //Wire variables for output of debounced buttons
@@ -78,8 +77,9 @@ module Controller(
                 //If true, decrement and set proper outputs
                 //Else, time is 0 and no decrement
                 if(TimeLeftCntReg > 0) begin
-                   
-                    TimeLeftCntReg <= TimeLeftCntReg - 1;
+                   if(!Sw0 && !Sw1) begin
+                        TimeLeftCntReg <= TimeLeftCntReg - 1;
+                   end     
                 end           
                 else begin
                     TimeLeftCntReg <= 0;

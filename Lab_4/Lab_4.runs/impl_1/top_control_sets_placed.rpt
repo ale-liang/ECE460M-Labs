@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Sat Mar  4 17:07:18 2023
+| Date         : Sun Mar  5 12:37:12 2023
 | Host         : LAPTOP-EPVRH703 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file top_control_sets_placed.rpt
 | Design       : top
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    13 |
-|    Minimum number of control sets                        |    13 |
+| Total control sets                                       |    14 |
+|    Minimum number of control sets                        |    14 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    44 |
+| Unused register locations in slices containing registers |    43 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,12 +39,12 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    13 |
+| Total control sets |    14 |
 | >= 0 to < 4        |     4 |
 | >= 4 to < 6        |     0 |
 | >= 6 to < 8        |     0 |
 | >= 8 to < 10       |     0 |
-| >= 10 to < 12      |     0 |
+| >= 10 to < 12      |     1 |
 | >= 12 to < 14      |     0 |
 | >= 14 to < 16      |     0 |
 | >= 16              |     9 |
@@ -58,34 +58,35 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              22 |           16 |
-| No           | No                    | Yes                    |              20 |            5 |
+| No           | No                    | No                     |              43 |           17 |
+| No           | No                    | Yes                    |               0 |            0 |
 | No           | Yes                   | No                     |             146 |           38 |
-| Yes          | No                    | No                     |               0 |            0 |
+| Yes          | No                    | No                     |              16 |            6 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |              16 |            6 |
+| Yes          | Yes                   | No                     |              32 |           10 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 4. Detailed Control Set Information
 -----------------------------------
 
-+--------------------+-----------------+--------------------------------+------------------+----------------+--------------+
-|    Clock Signal    |  Enable Signal  |        Set/Reset Signal        | Slice Load Count | Bel Load Count | Bels / Slice |
-+--------------------+-----------------+--------------------------------+------------------+----------------+--------------+
-|  CTL/bU/s1/slowClk |                 |                                |                1 |              1 |         1.00 |
-|  CTL/bD/s1/slowClk |                 |                                |                1 |              1 |         1.00 |
-|  CTL/bL/s1/slowClk |                 |                                |                1 |              1 |         1.00 |
-|  CTL/bR/s1/slowClk |                 |                                |                1 |              1 |         1.00 |
-|  slowClk           | CTL/bL/r2_reg_0 | CTL/TimeLeftCntReg[15]_i_1_n_0 |                6 |             16 |         2.67 |
-|  CLK_IBUF_BUFG     |                 |                                |               12 |             18 |         1.50 |
-|  CLK_IBUF_BUFG     |                 | DSP/count[0]_i_2_n_0           |                5 |             20 |         4.00 |
-|  CLK_IBUF_BUFG     |                 | CTL/bU/s1/slowClkReg           |                6 |             24 |         4.00 |
-|  CLK_IBUF_BUFG     |                 | CTL/f1/slowClkReg              |                6 |             24 |         4.00 |
-|  CLK_IBUF_BUFG     |                 | CTL/bD/s1/slowClkReg           |                6 |             24 |         4.00 |
-|  CLK_IBUF_BUFG     |                 | CTL/bL/s1/slowClkReg           |                6 |             24 |         4.00 |
-|  CLK_IBUF_BUFG     |                 | CTL/bR/s1/slowClkReg           |                6 |             24 |         4.00 |
-|  slowClk           |                 | CTL/cnt[25]_i_1_n_0            |                8 |             26 |         3.25 |
-+--------------------+-----------------+--------------------------------+------------------+----------------+--------------+
++--------------------+-----------------------------+----------------------+------------------+----------------+--------------+
+|    Clock Signal    |        Enable Signal        |   Set/Reset Signal   | Slice Load Count | Bel Load Count | Bels / Slice |
++--------------------+-----------------------------+----------------------+------------------+----------------+--------------+
+|  CTL/bU/s1/slowClk |                             |                      |                1 |              1 |         1.00 |
+|  CTL/bD/s1/slowClk |                             |                      |                1 |              1 |         1.00 |
+|  CTL/bL/s1/slowClk |                             |                      |                1 |              1 |         1.00 |
+|  CTL/bR/s1/slowClk |                             |                      |                1 |              1 |         1.00 |
+|  CLK_IBUF_BUFG     | CTL/E[0]                    | CTL/smallcnt         |                4 |             11 |         2.75 |
+|  slowClk           | CTL/bD/E[0]                 |                      |                6 |             16 |         2.67 |
+|  CLK_IBUF_BUFG     | CTL/TimeLeftCntReg_reg[5]_0 | CTL/smallcnt         |                6 |             21 |         3.50 |
+|  CLK_IBUF_BUFG     |                             | CTL/bU/s1/slowClkReg |                6 |             24 |         4.00 |
+|  CLK_IBUF_BUFG     |                             | CTL/f1/slowClkReg    |                6 |             24 |         4.00 |
+|  CLK_IBUF_BUFG     |                             | CTL/bD/s1/slowClkReg |                6 |             24 |         4.00 |
+|  CLK_IBUF_BUFG     |                             | CTL/bL/s1/slowClkReg |                6 |             24 |         4.00 |
+|  CLK_IBUF_BUFG     |                             | CTL/bR/s1/slowClkReg |                6 |             24 |         4.00 |
+|  slowClk           |                             | CTL/cnt[25]_i_1_n_0  |                8 |             26 |         3.25 |
+|  CLK_IBUF_BUFG     |                             |                      |               13 |             39 |         3.00 |
++--------------------+-----------------------------+----------------------+------------------+----------------+--------------+
 
 

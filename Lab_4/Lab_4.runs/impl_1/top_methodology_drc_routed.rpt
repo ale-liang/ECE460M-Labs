@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Sat Mar  4 17:07:38 2023
+| Date         : Sun Mar  5 12:37:26 2023
 | Host         : LAPTOP-EPVRH703 running 64-bit major release  (build 9200)
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
@@ -23,13 +23,12 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 205
-+-----------+------------------+------------------------------+------------+
-| Rule      | Severity         | Description                  | Violations |
-+-----------+------------------+------------------------------+------------+
-| TIMING-17 | Critical Warning | Non-clocked sequential cell  | 204        |
-| LUTAR-1   | Warning          | LUT drives async reset alert | 1          |
-+-----------+------------------+------------------------------+------------+
+             Violations found: 237
++-----------+------------------+-----------------------------+------------+
+| Rule      | Severity         | Description                 | Violations |
++-----------+------------------+-----------------------------+------------+
+| TIMING-17 | Critical Warning | Non-clocked sequential cell | 237        |
++-----------+------------------+-----------------------------+------------+
 
 2. REPORT DETAILS
 -----------------
@@ -1053,14 +1052,169 @@ Non-clocked sequential cell
 The clock pin DSP/count_reg[9]/C is not reached by a timing clock
 Related violations: <none>
 
-LUTAR-1#1 Warning
-LUT drives async reset alert  
-LUT cell DSP/count[0]_i_2, with 2 or more inputs, drives asynchronous preset/clear pin(s) DSP/count_reg[0]/CLR, DSP/count_reg[10]/CLR, DSP/count_reg[11]/CLR,
-DSP/count_reg[12]/CLR, DSP/count_reg[13]/CLR, DSP/count_reg[14]/CLR,
-DSP/count_reg[15]/CLR, DSP/count_reg[16]/CLR, DSP/count_reg[17]/CLR,
-DSP/count_reg[18]/CLR, DSP/count_reg[19]/CLR, DSP/count_reg[1]/CLR,
-DSP/count_reg[2]/CLR, DSP/count_reg[3]/CLR, DSP/count_reg[4]/CLR
- (the first 15 of 20 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+TIMING-17#205 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/off_reg/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#206 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[0]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#207 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[10]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#208 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[11]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#209 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[12]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#210 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[13]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#211 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[14]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#212 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[15]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#213 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[16]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#214 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[17]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#215 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[18]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#216 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[19]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#217 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[1]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#218 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[20]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#219 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[2]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#220 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[3]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#221 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[4]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#222 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[5]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#223 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[6]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#224 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[7]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#225 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[8]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#226 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/secCnt_reg[9]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#227 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/smallcnt_reg[0]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#228 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/smallcnt_reg[10]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#229 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/smallcnt_reg[1]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#230 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/smallcnt_reg[2]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#231 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/smallcnt_reg[3]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#232 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/smallcnt_reg[4]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#233 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/smallcnt_reg[5]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#234 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/smallcnt_reg[6]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#235 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/smallcnt_reg[7]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#236 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/smallcnt_reg[8]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#237 Critical Warning
+Non-clocked sequential cell  
+The clock pin DSP/smallcnt_reg[9]/C is not reached by a timing clock
 Related violations: <none>
 
 
