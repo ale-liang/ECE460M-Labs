@@ -1,0 +1,10 @@
+0.7
+2020.2
+Nov 18 2020
+09:47:47
+C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_4/Lab_4.srcs/sources_1/new/ButtonDebounce.v,1679190198,verilog,,C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_5/Lab_5.srcs/sources_1/new/controller.v,,ButtonDebounce;FiftyMilliSecClk;debouncer;singlePulse,,,,,,,,
+C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_5/Lab_5.sim/sim_1/behav/xsim/glbl.v,1605673889,verilog,,,,glbl,,,,,,,,
+C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_5/Lab_5.srcs/sim_1/new/top_tb.v,1679195182,verilog,,,,top_tb,,,,,,,,
+C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_5/Lab_5.srcs/sources_1/new/controller.v,1679195272,verilog,,C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_5/Lab_5.srcs/sources_1/new/memory.v,,controller,,,,,,,,
+C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_5/Lab_5.srcs/sources_1/new/memory.v,1679033502,verilog,,C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_5/Lab_5.srcs/sources_1/new/top.v,,memory,,,,,,,,
+C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_5/Lab_5.srcs/sources_1/new/top.v,1679189249,verilog,,C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_5/Lab_5.srcs/sim_1/new/top_tb.v,,FiftyMHZClk;top,,,,,,,,
