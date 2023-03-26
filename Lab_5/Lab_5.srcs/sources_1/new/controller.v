@@ -35,7 +35,7 @@ module controller(clk, cs, we, address, data_in, data_out, btns, swtchs, leds, s
     output[3:0] an;
     
     // DVR - display value register -> value to be displayed on output
-    reg [7:0] DVR; 
+    reg [15:0] DVR; 
     // DAR - display address register -> hold address of the data that should be displayed on the output  (1 under SPR)
     // SPR - stack pointer -> contain the address of the next free address past the top of the stack
     reg [6:0] DAR, SPR;
@@ -56,9 +56,7 @@ module controller(clk, cs, we, address, data_in, data_out, btns, swtchs, leds, s
     ButtonDebounce b3(clk, btns[3], btn3);
     
     //Display stuff
-    wire [15:0] Dout;
-    BinToBCD bcd (DVR, Dout);
-    Display dis (clk, Dout, an, segs);
+    Display dis (clk, DVR, an, segs);
     
     initial begin
         state <= 0;

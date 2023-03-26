@@ -22,7 +22,7 @@
 
 module Display(
     input CLK,
-    input [15:0] BCD,
+    input [7:0] HEX,
     output [3:0] ANODE,
     output [6:0] SEVSEG
     );
@@ -39,7 +39,7 @@ module Display(
     assign ANODE = ANODEreg;
     assign SEVSEG = SEVSEGreg;
     
-    BCDto7Seg (BCD, S0, S1, S2, S3);
+    BCDto7Seg (HEX, S0, S1, S2, S3);
     
     always @(posedge CLK)
     begin 
@@ -51,22 +51,22 @@ module Display(
         case(count[18:17])
         2'b00: begin
                 ANODEreg = 4'b0111; 
-                SEVSEGreg[6:0] = off ? ~0: ~S3;
+                SEVSEGreg[6:0] = off ? ~0: S3;
                 //SEVSEGreg[7:1] = 7'b1000000;
                end
         2'b01: begin
                 ANODEreg = 4'b1011; 
-                SEVSEGreg[6:0] = off ? ~0: ~S2;
+                SEVSEGreg[6:0] = off ? ~0: S2;
                 //SEVSEGreg[7:1] = 7'b1000000;
                end
         2'b10: begin
                 ANODEreg = 4'b1101; 
-                SEVSEGreg[6:0] = off ? ~0: ~S1;
+                SEVSEGreg[6:0] = off ? ~0: S1;
                 //SEVSEGreg[7:1] = 7'b1000000;
                end
         2'b11: begin
                 ANODEreg = 4'b1110; 
-                SEVSEGreg[6:0] = off ? ~0: ~S0;
+                SEVSEGreg[6:0] = off ? ~0: S0;
                 //SEVSEGreg[7:1] = 7'b1000000;
                end
         endcase

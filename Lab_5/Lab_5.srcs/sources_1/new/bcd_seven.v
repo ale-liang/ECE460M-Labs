@@ -21,26 +21,32 @@
 
 
 module bcd_seven(
-    input [3:0] bcd,
+    input [3:0] bin,
     output [6:0] seven
     );
     
     reg [6:0] seven;
  
-    always @(bcd)
+    always @(bin)
     begin
-      case (bcd)
-         4'b0000 : seven = 7'b0111111 ; 
-         4'b0001 : seven = 7'b0000110 ; 
-         4'b0010 : seven = 7'b1011011 ; 
-         4'b0011 : seven = 7'b1001111 ; 
-         4'b0100 : seven = 7'b1100110 ; 
-         4'b0101 : seven = 7'b1101101 ; 
-         4'b0110 : seven = 7'b1111101 ; 
-         4'b0111 : seven = 7'b0000111 ; 
-         4'b1000 : seven = 7'b1111111 ; 
-         4'b1001 : seven = 7'b1101111 ; 
-         default : seven = 7'b0000000 ; 
-      endcase
+      case (bin)
+            8'h0: seven = 7'b1000000; // 0
+            8'h1: seven = 7'b1111001; // 1
+            8'h2: seven = 7'b0100100; // 2
+            8'h3: seven = 7'b0110000; // 3
+            8'h4: seven = 7'b0011001; // 4
+            8'h5: seven = 7'b0010010; // 5
+            8'h6: seven = 7'b0000010; // 6
+            8'h7: seven = 7'b1111000; // 7
+            8'h8: seven = 7'b0000000; // 8
+            8'h9: seven = 7'b0010000; // 9
+            8'ha: seven = 7'b0001000; // A
+            8'hb: seven = 7'b0000011; // B
+            8'hc: seven = 7'b0100111; // C
+            8'hd: seven = 7'b0100001; // D
+            8'he: seven = 7'b0000110; // E
+            8'hf: seven = 7'b0001110; // F
+            default: seven = 7'b1111111; // blank
+        endcase
     end
 endmodule
