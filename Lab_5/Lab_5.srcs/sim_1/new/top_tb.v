@@ -31,8 +31,8 @@ module top_tb;
     top UUT (.clk(clk), .btns(btns), .swtchs(swtchs), .leds(leds), .segs(segs), .an(an));
     
     always begin
-        #10 clk = 1'b1;
-        #10 clk = 1'b0;
+        #5 clk = 1'b1;
+        #5 clk = 1'b0;
     end
     
     always @(posedge clk) begin

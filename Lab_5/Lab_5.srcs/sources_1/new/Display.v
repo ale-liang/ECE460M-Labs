@@ -39,7 +39,7 @@ module Display(
     assign ANODE = ANODEreg;
     assign SEVSEG = SEVSEGreg;
     
-    BCDto7Seg (HEX, S0, S1, S2, S3);
+    BCDto7Seg bs1(HEX, S0, S1, S2, S3);
     
     always @(posedge CLK)
     begin 

@@ -35,15 +35,17 @@ module controller(clk, cs, we, address, data_in, data_out, btns, swtchs, leds, s
     output[3:0] an;
     
     // DVR - display value register -> value to be displayed on output
-    reg [15:0] DVR; 
+    reg [7:0] DVR, nDVR; 
     // DAR - display address register -> hold address of the data that should be displayed on the output  (1 under SPR)
     // SPR - stack pointer -> contain the address of the next free address past the top of the stack
-    reg [6:0] DAR, SPR;
-    reg [4:0] state;
+    reg [6:0] DAR, SPR, nDAR, nSPR;
+    reg [4:0] state, nstate;
+    
     wire btn0, btn1, btn2, btn3;
+    reg prevbtn0, prevbtn1, prevbtn2, prevbtn3;
     wire emp;
     //var1 and var2 hold the values from the stack to be added or subtracted
-    reg [7:0] var1, var2;
+    reg [7:0] var1, var2, nvar1, nvar2;
     
     assign cs = we;
     assign emp = (SPR == 7'b1111111) ? 1 : 0;   
@@ -60,6 +62,7 @@ module controller(clk, cs, we, address, data_in, data_out, btns, swtchs, leds, s
     
     initial begin
         state <= 0;
+        nstate <= 0;
     end
     /*
     Notes
@@ -79,171 +82,292 @@ module controller(clk, cs, we, address, data_in, data_out, btns, swtchs, leds, s
     Dec - we = 0
     Inc - we = 0
     */
-    
     always @(posedge clk) begin
+        state <= nstate;
+        SPR <= nSPR;
+        DAR <= nDAR;
+        DVR <= nDVR;
+        prevbtn0 <= btn0;
+        prevbtn1 <= btn1;
+        prevbtn2 <= btn2;
+        prevbtn3 <= btn3;
+        var1 <= nvar1;
+        var2 <= nvar2;
+    end
+    
+    always @(*) begin
         case (state)
             0: begin
-                SPR <= 7'b1111111;
-                DAR <= 7'b0000000;
-                DVR <= 8'b00000000;
-                address <= 7'b1111111;
-                data_out <= 8'b11111111;
-                we <= 0;
-                state <= 1;
-                var1 <= 0;
-                var2 <= 0;
+                nSPR = 7'b1111111;
+                nDAR = 7'b0000000;
+                nDVR = 8'b00000000;
+                address = 7'b1111111;
+                data_out = 8'b11111111;
+                we = 0;
+                nstate = 1;
+                nvar1 = 0;
+                nvar2 = 0;
             end
             1: begin
-                if(btn3 == 0 && btn2 == 0)
-                    state <= 2;
-                else if (btn3 == 0 && btn2 == 1)
-                    state <= 3;
-                else if (btn3 == 1 && btn2 == 0)        
-                    state <= 4;
-                else if (btn3 == 1 && btn2 == 1) 
-                    state <= 5;
+                we = 0;
+                nSPR = SPR;
+                nDAR = DAR;
+                nDVR = DVR;
+                address = DAR;
+                nvar1 = 0;
+                nvar2 = 0;
+                
+                if(btn3 == 0 && btn2 == 0 && btn1 == 0 && btn0 == 1 && prevbtn0 == 0) //push
+                    nstate = 20;
+                else if (btn3 == 0 && btn2 == 0 && btn1 == 1 && btn0 == 0 && prevbtn1 == 0) //pop
+                    nstate = 2;    
+                else if (btn3 == 0 && btn2 == 1 && btn1 == 0 && btn0 == 1 && prevbtn0 == 0) //add
+                    nstate = 21;
+                else if (btn3 == 0 && btn2 == 1 && btn1 == 1 && btn0 == 0 && prevbtn1 == 0) //subtract
+                    nstate = 3;
+                else if (btn3 == 1 && btn2 == 0 && btn1 == 0 && btn0 == 1 && prevbtn0 == 0) //top 
+                    nstate = 22;
+                else if (btn3 == 1 && btn2 == 0 && btn1 == 1 && btn0 == 0 && prevbtn1 == 0) //clear   
+                    nstate = 4;    
+                else if (btn3 == 1 && btn2 == 1 && btn1 == 0 && btn0 == 1 && prevbtn0 == 0) //increment
+                    nstate = 23;
+                else if (btn3 == 1 && btn2 == 1 && btn1 == 1 && btn0 == 0 && prevbtn1 == 0) //decrement
+                    nstate = 5;    
                 else
-                    state <= 1;       
+                    nstate = 1;       
             end
-            2: begin // mode btn 3 = 0, btn 2 = 0
-                DVR <= data_in;
-                we <= 0;
-                address <= DAR;
-                if(btn1) begin // delete/pop - pops and discards the 8 bit value on the top of the stack
-                    we <= 0;
-                    if(emp != 1) begin
-                        SPR <= SPR + 1;
-                        DAR <= SPR + 2;
-                    end
-                end
-                else if (btn0) begin // enter/push - read the values from switches and pushes it onto stack
-                    we <= 1;
-                    data_out <= swtchs;
-                    address <= SPR;
-                    SPR <= SPR - 1;
-                    DAR <= SPR;
+            2: begin // mode btn 3 = 0, btn 2 = 0 - pop
+                if(!emp) begin
+                    we = 0;
+                    nSPR = SPR + 1;
+                    nDAR = DAR + 1;
+                    nDVR = DVR;
+                    address = DAR + 1;
+                    nvar1 = 0;
+                    nvar2 = 0;
+                    nstate = 19;
                 end
                 else begin
-                    state <= 1;
+                    we = 0;
+                    nSPR = SPR;
+                    nDAR = DAR;
+                    nDVR = DVR;
+                    address = DAR;
+                    nvar1 = 0;
+                    nvar2 = 0;
+                    nstate = 1;
                 end
             end
-            3: begin // mode btn 3 = 0, btn2 = 1
-                DVR <= data_in;
-                we <= 0;
-                address <= DAR;
-                if(btn1) begin // subtract - pops the top 2 values on stack and subtracts them and then pushes the result onto the stack
-                    DAR <= SPR + 1; // DAR at address of top element on the stack
-                    address <= SPR + 1; 
-                    state <= 12;
-                end
-                else if (btn0) begin // add - pop top 2 values on stack and adds them and then pushes the result onto top of stack
-                    DAR <= SPR + 1; // DAR at address of top element on the stack
-                    address <= SPR + 1;
-                    state <= 6;
-                end
-                else begin
-                    state <= 1;
-                end
+            20: begin //push
+                we = 1;
+                data_out = swtchs;
+                nSPR = SPR - 1;
+                nDAR = DAR - 1;
+                nDVR = swtchs;
+                address = DAR - 1;
+                nvar1 = 0;
+                nvar2 = 0;
+                nstate <= 18;    
             end
-           4: begin // mode btn3 = 1, btn2 = 0
-                DVR <= data_in;
-                we <= 0;
-                address <= DAR;
-                if(btn1) begin // clear/RST - set SPR = 0x7F, DAR = 0x00, DVR = 0x00
-                    SPR <= 7'b1111111;
-                    DAR <= 7'b0000000;
-                    DVR <= 8'b00000000;
-                    address <= 7'b1111111;
-                    data_out <= 8'b11111111;
-                end
-                else if (btn0) begin // top - set DAR to top of stack (SPR + 1)
-                    DAR <= SPR + 1;
-                end
-                else begin
-                    state <= 1;
-                end
+            3: begin // mode btn 3 = 0, btn2 = 1 - subtract
+                we = 0;
+                nSPR = SPR;
+                nDAR = DAR;
+                nDVR = DVR;
+                address = DAR;
+                nvar1 = 0;
+                nvar2 = 0;
+                nstate = 12;
             end
-            5: begin //mode btn3 = 1, btn2 = 1
-                DVR <= data_in;
-                we <= 0;
-                address <= DAR;                
-                if(btn1) begin // dec addr - decrements DAR by 1
-                    DAR <= DAR - 1;
-                end
-                else if (btn0) begin // inc addr - increments DAR by 1
-                    DAR <= DAR + 1;
-                end
-                else begin
-                    state <= 1;
-                end
+            21: begin // add
+                we = 0;
+                nSPR = SPR;
+                nDAR = DAR;
+                nDVR = DVR;
+                address = DAR;
+                nvar1 = 0;
+                nvar2 = 0;
+                nstate = 6;
+            end
+            4: begin // mode btn3 = 1, btn2 = 0 - CLEAR/RESET
+                nstate = 0;
+            end
+            22: begin // TOP
+                we = 0;
+                nSPR = SPR;
+                nDAR = SPR + 1;
+                nDVR = DVR;
+                address = SPR + 1;
+                nvar1 = 0;
+                nvar2 = 0;
+                nstate = 19;
+            end
+            5: begin //mode btn3 = 1, btn2 = 1 - DECREMENT
+                we = 0;
+                nSPR = SPR;
+                nDAR = DAR - 1;
+                nDVR = DVR;
+                address = DAR - 1;
+                nvar1 = 0;
+                nvar2 = 0;
+                nstate = 19;
+            end
+            23: begin // INCREMENT DAR
+                we = 0;
+                nSPR = SPR;
+                nDAR = DAR + 1;
+                nDVR = DVR;
+                address = DAR + 1;
+                nvar1 = 0;
+                nvar2 = 0;
+                nstate = 19;
             end
             6: begin // wait state transition for addition
-                state <= 7;
+                we = 0;
+                nSPR = SPR;
+                nDAR = DAR;
+                nDVR = DVR;
+                address = DAR;
+                nvar1 = 0;
+                nvar2 = 0;
+                nstate = 7;
             end
             7: begin //read in 1st value
-                var2 <= data_in;
-                SPR <= SPR + 1; //drop stack by 1 element
-                DAR <= DAR + 1; // move to next element by going down 1
-                address <= DAR + 1;
-                state <= 8;
+                nvar2 = data_in;
+                we = 0;
+                nSPR = SPR;
+                nDAR = DAR;
+                nDVR = DVR;
+                nvar1 = 0;
+                address = DAR + 1;
+                nstate = 8;
             end    
             8: begin // wait
-                state <= 9;
+                we = 0;
+                nSPR = SPR;
+                nDAR = DAR;
+                nDVR = DVR;
+                address = DAR;
+                nvar2 = var2;
+                nvar1 = var1;
+                nstate = 9;
             end
             9: begin //read in 2nd value
-                var1 <= data_in;
-                SPR <= SPR + 1; //drop stack by element
-                state <= 10;
+                nvar1 = data_in;
+                we = 0;
+                nSPR = SPR;
+                nDAR = DAR;
+                nDVR = DVR;
+                address = DAR;
+                nvar2 = var2;
+                nstate = 10;
             end
             10: begin //wait
-                state <= 11;
+                nstate = 11;
             end
             11: begin // push addition value
-                we <= 1;
-                address <= SPR; //push given SPR with value onto address
-                data_out <= var1 + var2; 
-                SPR <= SPR - 1; //increment SPR by 1
-                state <= 18;
+                we = 1;
+                nvar1 = 0;
+                nvar2 = 0;
+                data_out = var1 + var2; 
+                nSPR = SPR + 1; //increment SPR by 1
+                nDAR = DAR + 1;
+                nDVR = DVR;
+                address = DAR + 1;
+                nstate = 18;
             end
             12: begin // wait state transition for addition
-                state <= 13;
+                we = 0;
+                nSPR = SPR;
+                nDAR = DAR;
+                nDVR = DVR;
+                address = DAR;
+                nvar1 = 0;
+                nvar2 = 0;
+                nstate = 13;
             end
             13: begin //read in first value and update addresses
-                var2 <= data_in;
-                SPR <= SPR + 1;
-                DAR <= DAR + 1;
-                address <= DAR + 1;
-                state <= 14;
+                nvar2 = data_in;
+                we = 0;
+                nSPR = SPR;
+                nDAR = DAR;
+                nDVR = DVR;
+                nvar1 = 0;
+                address = DAR + 1;
+                nstate = 14;
             end    
             14: begin //wait
-                state <= 15;
+                we = 0;
+                nSPR = SPR;
+                nDAR = DAR;
+                nDVR = DVR;
+                address = DAR;
+                nvar2 = var2;
+                nvar1 = var1;
+                nstate = 15;
             end
             15: begin //read in 2nd value
-                var1 <= data_in;
-                SPR <= SPR + 1;
-                state <= 16;
+                nvar1 = data_in;
+                we = 0;
+                nSPR = SPR;
+                nDAR = DAR;
+                nDVR = DVR;
+                address = DAR;
+                nvar2 = var2;
+                nstate = 16;
             end
             16: begin // wait
-                state <= 17;
+                we = 0;
+                nSPR = SPR;
+                nDAR = DAR;
+                nDVR = DVR;
+                address = DAR;
+                nvar2 = var2;
+                nvar1 = var1;
+                nstate = 17;
             end
             17: begin //pushing for subtraction
-                we <= 1;
-                address <= SPR; //push to this address where the SPR is 
-                data_out <= var1 - var2;
-                SPR <= SPR - 1;
-                state <= 18;
+                we = 1;
+                nvar1 = 0;
+                nvar2 = 0;
+                data_out = var1 - var2; 
+                nSPR = SPR + 1; //increment SPR by 1
+                nDAR = DAR + 1;
+                nDVR = DVR;
+                address = DAR + 1;
+                nstate = 18;
             end
-            18: begin
-                state <= 1;
+            18: begin //wait
+                we = 0;
+                nvar1 = 0;
+                nvar2 = 0;
+                nSPR = SPR; 
+                nDAR = DAR;
+                nDVR = DVR;
+                address = DAR;
+                nstate = 19;
+            end
+            19: begin //READ AND UPDATE THE DVR
+                we = 0;
+                nSPR = SPR;
+                nDAR = DAR;
+                address = DAR;
+                nvar1 = 0;
+                nvar2 = 0;
+                nDVR = data_in;
+                address = DAR;
+                nstate = 1;
             end
             default: begin
-                state <= 0;
-                SPR <= 7'b1111111;
-                DAR <= 7'b0000000;
-                DVR <= 8'b00000000;
-                address <= 7'b1111111;
-                data_out <= 8'b11111111;
-                we <= 0;
+                nstate = 0;
+                nSPR = 7'b1111111;
+                nDAR = 7'b0000000;
+                nDVR = 8'b00000000;
+                address = 7'b1111111;
+                data_out = 8'b11111111;
+                we = 0;
+                nvar1 = 0;
+                nvar2 = 0;
              end    
         endcase        
     end
