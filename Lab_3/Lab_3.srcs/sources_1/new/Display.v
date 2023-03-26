@@ -3,7 +3,7 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 03/25/2023 07:56:06 PM
+// Create Date: 02/20/2023 02:02:33 AM
 // Design Name: 
 // Module Name: Display
 // Project Name: 
@@ -19,55 +19,61 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
 module Display(
+    input [15:0] Bin,
     input CLK,
-    input [15:0] BCD,
+    input RESET,
+    input DMILES,
     output [3:0] ANODE,
-    output [6:0] SEVSEG
+    output [7:0] SEVSEG
     );
+    
+    wire [15:0] BCD;
     wire [6:0] S0;
     wire [6:0] S1;
     wire [6:0] S2;
     wire [6:0] S3;
     
-    reg off = 0;
-    reg [18:0] count = 0;
+    reg [19:0] count;
     reg [3:0] ANODEreg;
-    reg [6:0] SEVSEGreg;
+    reg [7:0] SEVSEGreg;
     
     assign ANODE = ANODEreg;
     assign SEVSEG = SEVSEGreg;
     
-    BCDto7Seg (BCD, S0, S1, S2, S3);
+    BinToBCD BO (Bin, BCD);
+    BCDto7SegDsp SS (BCD, S0, S1, S2, S3);
     
-    always @(posedge CLK)
+    always @(posedge CLK or posedge RESET)
     begin 
-        count = count + 1;
-    end
+        if (RESET == 1)
+            count <= 0;
+        else
+            count <= count + 1;
+    end 
     
-    always @(count[18:17])
+    always @(count[19:18])
     begin
-        case(count[18:17])
+        case(count[19:18])
         2'b00: begin
                 ANODEreg = 4'b0111; 
-                SEVSEGreg[6:0] = off ? ~0: ~S3;
-                //SEVSEGreg[7:1] = 7'b1000000;
+                SEVSEGreg[7:1] = ~S3;
+                SEVSEGreg[0] = 1;
                end
         2'b01: begin
                 ANODEreg = 4'b1011; 
-                SEVSEGreg[6:0] = off ? ~0: ~S2;
-                //SEVSEGreg[7:1] = 7'b1000000;
+                SEVSEGreg[7:1] = ~S2;
+                SEVSEGreg[0] = 1;
                end
         2'b10: begin
                 ANODEreg = 4'b1101; 
-                SEVSEGreg[6:0] = off ? ~0: ~S1;
-                //SEVSEGreg[7:1] = 7'b1000000;
+                SEVSEGreg[7:1] = ~S1;
+                SEVSEGreg[0] = ~DMILES;
                end
         2'b11: begin
                 ANODEreg = 4'b1110; 
-                SEVSEGreg[6:0] = off ? ~0: ~S0;
-                //SEVSEGreg[7:1] = 7'b1000000;
+                SEVSEGreg[7:1] = ~S0;
+                SEVSEGreg[0] = 1;
                end
         endcase
     end
