@@ -31,10 +31,10 @@ module Display(
     wire [6:0] S2;
     wire [6:0] S3;
     
-    reg off = 1;
-    reg [19:0] count = 0;
+    reg off = 0;
+    reg [18:0] count = 0;
     reg [3:0] ANODEreg;
-    reg [7:0] SEVSEGreg;
+    reg [6:0] SEVSEGreg;
     
     assign ANODE = ANODEreg;
     assign SEVSEG = SEVSEGreg;
@@ -46,9 +46,9 @@ module Display(
         count = count + 1;
     end
     
-    always @(count[19:18])
+    always @(count[18:17])
     begin
-        case(count[19:18])
+        case(count[18:17])
         2'b00: begin
                 ANODEreg = 4'b0111; 
                 SEVSEGreg[6:0] = off ? ~0: ~S3;
@@ -66,9 +66,8 @@ module Display(
                end
         2'b11: begin
                 ANODEreg = 4'b1110; 
-                SEVSEGreg[7:1] = off ? ~0: ~S0;
+                SEVSEGreg[6:0] = off ? ~0: ~S0;
                 //SEVSEGreg[7:1] = 7'b1000000;
-                SEVSEGreg[0] = 1;
                end
         endcase
     end
