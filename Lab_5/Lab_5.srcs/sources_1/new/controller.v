@@ -55,6 +55,11 @@ module controller(clk, cs, we, address, data_in, data_out, btns, swtchs, leds, s
     ButtonDebounce b2(clk, btns[2], btn2);
     ButtonDebounce b3(clk, btns[3], btn3);
     
+    //Display stuff
+    wire [15:0] Dout;
+    BinToBCD bcd (DVR, Dout);
+    Display dis (clk, Dout, an, segs);
+    
     initial begin
         state <= 0;
     end
