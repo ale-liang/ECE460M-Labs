@@ -54,8 +54,11 @@ module controller(clk, cs, we, address, data_in, data_out, btns, swtchs, leds, s
     
     ButtonDebounce b0(clk, btns[0], btn0);
     ButtonDebounce b1(clk, btns[1], btn1);
-    ButtonDebounce b2(clk, btns[2], btn2);
-    ButtonDebounce b3(clk, btns[3], btn3);
+    //ButtonDebounce b2(clk, btns[2], btn2);
+    //ButtonDebounce b3(clk, btns[3], btn3);
+    
+    assign btn2 = btns[2];
+    assign btn3 = btns[3];
     
     //Display stuff
     Display dis (clk, DVR, an, segs);
