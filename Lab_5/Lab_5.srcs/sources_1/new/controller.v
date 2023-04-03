@@ -266,6 +266,13 @@ module controller(clk, cs, we, address, data_in, data_out, btns, swtchs, leds, s
                 nstate = 10;
             end
             10: begin //wait
+                we = 0;
+                nSPR = SPR;
+                nDAR = DAR;
+                nDVR = DVR;
+                address = DAR;
+                nvar2 = var2;
+                nvar1 = var1;
                 nstate = 11;
             end
             11: begin // push addition value
