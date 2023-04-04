@@ -1,8 +1,8 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Sun Feb 26 19:16:19 2023
-| Host         : DESKTOP-C2GQFDO running 64-bit major release  (build 9200)
+| Date         : Wed Mar  1 21:48:36 2023
+| Host         : LAPTOP-EPVRH703 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file top_control_sets_placed.rpt
 | Design       : top
 | Device       : xc7a35t
@@ -87,8 +87,8 @@ Table of Contents
 |  CLK_IBUF_BUFG          |                              | RESET_IBUF                   |                5 |             20 |         4.00 |
 |  CLK_IBUF_BUFG          | PG/cnt0                      | PG/cnt[21]                   |                6 |             21 |         3.50 |
 |  CLK_IBUF_BUFG          | PG/cnt1_carry__0_n_0         |                              |                7 |             22 |         3.14 |
-|  CLK_IBUF_BUFG          |                              | PG/secondGenerator/secPulse  |                7 |             25 |         3.57 |
 |  CLK_IBUF_BUFG          |                              | FT/sec_2                     |                7 |             25 |         3.57 |
+|  CLK_IBUF_BUFG          |                              | PG/secondGenerator/secPulse  |                7 |             25 |         3.57 |
 |  CLK_IBUF_BUFG          |                              | FT/twoSec_0                  |                8 |             31 |         3.88 |
 |  pulseGen_BUFG          |                              | RESET_IBUF                   |               14 |             48 |         3.43 |
 +-------------------------+------------------------------+------------------------------+------------------+----------------+--------------+

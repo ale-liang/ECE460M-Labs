@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Sun Mar 26 13:06:55 2023
+| Date         : Sun Mar 26 15:32:26 2023
 | Host         : LAPTOP-EPVRH703 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file top_control_sets_placed.rpt
 | Design       : top
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    12 |
-|    Minimum number of control sets                        |    12 |
+| Total control sets                                       |     8 |
+|    Minimum number of control sets                        |     8 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    36 |
+| Unused register locations in slices containing registers |    22 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,15 +39,15 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    12 |
-| >= 0 to < 4        |     5 |
+| Total control sets |     8 |
+| >= 0 to < 4        |     3 |
 | >= 4 to < 6        |     0 |
 | >= 6 to < 8        |     0 |
 | >= 8 to < 10       |     1 |
 | >= 10 to < 12      |     0 |
 | >= 12 to < 14      |     0 |
 | >= 14 to < 16      |     0 |
-| >= 16              |     6 |
+| >= 16              |     4 |
 +--------------------+-------+
 * Control sets can be remapped at either synth_design or opt_design
 
@@ -58,9 +58,9 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |             140 |           69 |
+| No           | No                    | No                     |             130 |           58 |
 | No           | No                    | Yes                    |               0 |            0 |
-| No           | Yes                   | No                     |              96 |           24 |
+| No           | Yes                   | No                     |              48 |           12 |
 | Yes          | No                    | No                     |               0 |            0 |
 | Yes          | No                    | Yes                    |               0 |            0 |
 | Yes          | Yes                   | No                     |               0 |            0 |
@@ -75,16 +75,12 @@ Table of Contents
 +-------------------------------+---------------+-----------------------+------------------+----------------+--------------+
 |  ctrl/b0/s1/slowClk           |               |                       |                1 |              1 |         1.00 |
 |  ctrl/b1/s1/slowClk           |               |                       |                1 |              1 |         1.00 |
-|  ctrl/b2/s1/slowClk           |               |                       |                1 |              1 |         1.00 |
-|  ctrl/b3/s1/slowClk           |               |                       |                1 |              1 |         1.00 |
 |  clk_IBUF_BUFG                |               |                       |                1 |              2 |         2.00 |
-|  ctrl/data_out_reg[7]_i_2_n_1 |               |                       |                3 |              8 |         2.67 |
+|  ctrl/data_out_reg[7]_i_2_n_1 |               |                       |                5 |              8 |         1.60 |
 |  slowClk_BUFG                 |               | ctrl/b0/s1/slowClkReg |                6 |             24 |         4.00 |
 |  slowClk_BUFG                 |               | ctrl/b1/s1/slowClkReg |                6 |             24 |         4.00 |
-|  slowClk_BUFG                 |               | ctrl/b2/s1/slowClkReg |                6 |             24 |         4.00 |
-|  slowClk_BUFG                 |               | ctrl/b3/s1/slowClkReg |                6 |             24 |         4.00 |
-|  n_0_85_BUFG                  |               |                       |               25 |             46 |         1.84 |
-|  slowClk_BUFG                 |               |                       |               36 |             80 |         2.22 |
+|  n_0_150_BUFG                 |               |                       |               22 |             46 |         2.09 |
+|  slowClk_BUFG                 |               |                       |               28 |             72 |         2.57 |
 +-------------------------------+---------------+-----------------------+------------------+----------------+--------------+
 
 

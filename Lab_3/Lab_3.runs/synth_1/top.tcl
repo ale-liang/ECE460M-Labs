@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "C:/Users/Trace Hamada/Documents/Lab_3/Lab_3.runs/synth_1/top.tcl"
+  variable script "C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_3/Lab_3.runs/synth_1/top.tcl"
   variable category "vivado_synth"
 }
 
@@ -70,34 +70,30 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param chipscope.maxJobs 3
-set_param synth.incrementalSynthesisCache {C:/Users/Trace Hamada/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-6296-DESKTOP-C2GQFDO/incrSyn}
 set_param xicom.use_bs_reader 1
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir {C:/Users/Trace Hamada/Documents/Lab_3/Lab_3.cache/wt} [current_project]
-set_property parent.project_path {C:/Users/Trace Hamada/Documents/Lab_3/Lab_3.xpr} [current_project]
+set_property webtalk.parent_dir C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_3/Lab_3.cache/wt [current_project]
+set_property parent.project_path C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_3/Lab_3.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property ip_output_repo {c:/Users/Trace Hamada/Documents/Lab_3/Lab_3.cache/ip} [current_project]
+set_property ip_output_repo c:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_3/Lab_3.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
-  {C:/Users/Trace Hamada/Documents/Lab_3/Lab_3.srcs/sources_1/new/BCDto7SegDsp.v}
-  {C:/Users/Trace Hamada/Documents/Lab_3/Lab_3.srcs/sources_1/new/BinToBCD.v}
-  {C:/Users/Trace Hamada/Documents/Lab_3/Lab_3.srcs/sources_1/new/Display.v}
-  {C:/Users/Trace Hamada/Documents/Lab_3/Lab_3.srcs/sources_1/new/FitbitTracker.v}
-  {C:/Users/Trace Hamada/Documents/Lab_3/Lab_3.srcs/sources_1/new/PulseGen.v}
-  {C:/Users/Trace Hamada/Documents/Lab_3/Lab_3.srcs/sources_1/new/SecGen.v}
-  {C:/Users/Trace Hamada/Documents/Lab_3/Lab_3.srcs/sources_1/new/bcd_seven.v}
-  {C:/Users/Trace Hamada/Documents/Lab_3/Lab_3.srcs/sources_1/new/top.v}
+  C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_3/Lab_3.srcs/sources_1/new/BCDto7SegDsp.v
+  C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_3/Lab_3.srcs/sources_1/new/BinToBCD.v
+  C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_3/Lab_3.srcs/sources_1/new/Display.v
+  C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_3/Lab_3.srcs/sources_1/new/FitbitTracker.v
+  C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_3/Lab_3.srcs/sources_1/new/PulseGen.v
+  C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_3/Lab_3.srcs/sources_1/new/SecGen.v
+  C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_3/Lab_3.srcs/sources_1/new/bcd_seven.v
+  C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_3/Lab_3.srcs/sources_1/new/top.v
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -108,8 +104,8 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc {{C:/Users/Trace Hamada/Documents/Lab_3/Lab_3.srcs/constrs_1/new/Lab_3.xdc}}
-set_property used_in_implementation false [get_files {{C:/Users/Trace Hamada/Documents/Lab_3/Lab_3.srcs/constrs_1/new/Lab_3.xdc}}]
+read_xdc C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_3/Lab_3.srcs/constrs_1/new/Lab_3.xdc
+set_property used_in_implementation false [get_files C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_3/Lab_3.srcs/constrs_1/new/Lab_3.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]

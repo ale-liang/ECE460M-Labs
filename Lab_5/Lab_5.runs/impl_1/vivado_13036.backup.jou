@@ -2,11 +2,11 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Sun Feb 26 18:42:29 2023
-# Process ID: 3156
-# Current directory: C:/Users/Trace Hamada/Documents/Lab_3/Lab_3.runs/impl_1
+# Start of session at: Sun Mar 26 15:03:35 2023
+# Process ID: 13036
+# Current directory: C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_5/Lab_5.runs/impl_1
 # Command line: vivado.exe -log top.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source top.tcl -notrace
-# Log file: C:/Users/Trace Hamada/Documents/Lab_3/Lab_3.runs/impl_1/top.vdi
-# Journal file: C:/Users/Trace Hamada/Documents/Lab_3/Lab_3.runs/impl_1\vivado.jou
+# Log file: C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_5/Lab_5.runs/impl_1/top.vdi
+# Journal file: C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_5/Lab_5.runs/impl_1\vivado.jou
 #-----------------------------------------------------------
 source top.tcl -notrace

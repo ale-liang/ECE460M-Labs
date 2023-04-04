@@ -25,7 +25,7 @@ module ButtonDebounce(
     input PB,
     output PB_Out
     );
-    
+            
     reg r1, r2, r3 = 0;
     wire slowClk;
     FiftyMilliSecClk s1(clk, slowClk);
@@ -43,7 +43,6 @@ module ButtonDebounce(
          
     assign PB_Out = ~r3 & r2;
     
-    
 endmodule
 
 module FiftyMilliSecClk(
@@ -52,7 +51,7 @@ module FiftyMilliSecClk(
     );
     
     parameter FiftyMilliSecCnt = 2500000;
-    
+    //parameter FiftyMilliSecCnt = 2;
     reg [24:0] cnt = 0;
     reg slowClkReg = 0;
     assign slowClk = slowClkReg;
@@ -60,7 +59,7 @@ module FiftyMilliSecClk(
     always@( posedge clk) begin
         if(cnt == FiftyMilliSecCnt) begin
             slowClkReg <= ~slowClkReg;
-            cnt <= 0;
+            cnt <= 1;
         end
         else
             cnt = cnt + 1;
