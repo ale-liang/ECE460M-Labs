@@ -45,11 +45,11 @@ module fp_adder(
         
         //Compare Exponents
         if (a[6:4] > b[6:4]) begin //shift a until expA == expB
-            fB <= fB >> (a[6:4]-b[6:4]);
-            eOut <= a[6:4];
+            fB = fB >> (a[6:4]-b[6:4]);
+            eOut = a[6:4];
         end else if (b[6:4] > a[6:4]) begin //shift b until expA == expB
-            fA <= fA >> (b[6:4]-a[6:4]);
-            eOut <= b[6:4];
+            fA = fA >> (b[6:4]-a[6:4]);
+            eOut = b[6:4];
         end //else expA == expB so do nothing
         
         //Add Fractions
@@ -71,18 +71,18 @@ module fp_adder(
         
         //Check for fraction overflow and Normalize Fraction
         if(fOut[9] == 1'b1) begin
-            fOut <= fOut >> 1;
-            eOut <= eOut + 1;
+            fOut = fOut >> 1;
+            eOut = eOut + 1;
         end else begin
             for(i = 0; i < 10; i = i + 1) begin
-                if (fOut[8] != 1'b1) begin
-                    fOut <= fOut << 1;
-                    eOut <= eOut - 1;
+                if (fOut[8] != 1'b1 && eOut > 4'b0) begin
+                    fOut = fOut << 1;
+                    eOut = eOut - 1;
                 end
             end    
         end
     end
     
-    assign out = {sOut, eOut[2:0], fOut[7:4]};
+    assign out = {sOut, eOut[2:0], fOut[8:5]};
     
 endmodule
