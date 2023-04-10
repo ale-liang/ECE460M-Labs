@@ -54,8 +54,8 @@ module Matrix(
     output reg done
     );
       
-    wire [7:0] startMAC;
-    
+    reg [8:0] startMAC;
+    reg [2:0] cs; //state
     reg [7:0] row0Input; //top left
     reg [7:0] col0Input;
     reg [7:0] row1Input; //middle left/top
@@ -63,6 +63,19 @@ module Matrix(
     reg [7:0] row2Input; //bot left/top right
     reg [7:0] col2Input;
     
+    reg [1:0] wait3Cycles;
+    
+    reg [5:0] clkCnt;
+    reg slowClk;
+    
+    always@(posedge clk) begin
+        if(clkCnt == 20) begin
+            slowClk = ~slowClk;
+            clkCnt = 0;
+        end else begin
+            clkCnt = clkCnt + 1;
+        end    
+    end
     // MAPPING OUT THE Matrix
     //        c0 c1 c2
     //     r0 00 01 02
@@ -83,5 +96,125 @@ module Matrix(
     MAC m_c21(clk, r20to21, c11to21, startMAC[7], c21, r21to22, ); //doesn't need to pass B
     MAC m_c22(clk, r21to22, c12to22, startMAC[8], c22, ,); //doesn't need to pass A and B
     
+    
+    initial begin
+        startMAC = 0;
+        row0Input = 0;
+        row1Input = 0;
+        row2Input = 0;
+        col0Input = 0;
+        col1Input = 0;
+        col2Input = 0;
+        cs = 0;
+        slowClk = 0;
+        clkCnt = 0;
+        wait3Cycles = 0;
+        
+    end
+    
+    always@(posedge slowClk) begin
+        case(cs)
+        0: begin // reset/initial state
+            startMAC <= 0;
+            row0Input <= 0;
+            row1Input <= 0;
+            row2Input <= 0;
+            col0Input <= 0;
+            col1Input <= 0;
+            col2Input <= 0;
+            wait3Cycles = 0;
+            done <= 0;
+            if(start) begin
+                cs <= 1;
+            end else begin
+                cs <= 0;
+            end    
+        end
+        1: begin // begin feeding values into MAC
+            row0Input <= a00;
+            row1Input <= 0;
+            row2Input <= 0;
+            col0Input <= b00;
+            col1Input <= 0;
+            col2Input <= 0;
+            startMAC[0] <= 1;
+            cs <= 2;
+        end
+        2: begin
+            row0Input <= a01;
+            row1Input <= a10;
+            row2Input <= 0;
+            col0Input <= b10;
+            col1Input <= b01;
+            col2Input <= 0;
+            startMAC[1] <= 1;
+            startMAC[3] <= 1;
+            cs <= 3;
+        end
+        3: begin
+            row0Input <= a02;
+            row1Input <= a11;
+            row2Input <= a20;
+            col0Input <= b20;
+            col1Input <= b11;
+            col2Input <= b02;
+            startMAC[2] <= 1;
+            startMAC[4] <= 1;
+            startMAC[6] <= 1;
+            cs <= 4;
+        end
+        4: begin
+            row0Input <= 0;
+            row1Input <= a12;
+            row2Input <= a21;
+            col0Input <= 0;
+            col1Input <= b21;
+            col2Input <= b12;
+            startMAC[5] <= 1;
+            startMAC[7] <= 1;
+            cs <= 5;
+        end
+        5: begin
+            row0Input <= 0;
+            row1Input <= 0;
+            row2Input <= a22;
+            col0Input <= 0;
+            col1Input <= 0;
+            col2Input <= b22;
+            startMAC[8] <= 1;
+            cs <= 6;
+        end
+        6: begin
+            row0Input <= 0;
+            row1Input <= 0;
+            row2Input <= 0;
+            col0Input <= 0;
+            col1Input <= 0;
+            col2Input <= 0;
+            startMAC <= 9'b111111111;
+            cs <= 6;
+            if (wait3Cycles == 3) begin
+                cs <= 7;
+            end else begin
+                wait3Cycles <= wait3Cycles + 1;
+                cs <= 6;
+            end
+        end
+        7: begin
+            done <= 1'b1;
+            wait3Cycles <= 0;
+            startMAC <= 0;
+            if(start) begin
+                cs <= 0;
+            end else begin
+                cs <= 7;
+            end
+            
+        end
+        default: begin
+            cs <= 0;
+        end
+    endcase    
+    end
     
 endmodule
