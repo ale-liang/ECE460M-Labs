@@ -50,4 +50,6 @@ module MAC(
         end
     end
     
+    assign outMAC = accumulated_sum;
+    
 endmodule

@@ -42,15 +42,15 @@ module Matrix(
     input [7:0] b20,
     input [7:0] b21,
     input [7:0] b22,    
-    output [7:0] c00,
-    output [7:0] c01,
-    output [7:0] c02,
-    output [7:0] c10,
-    output [7:0] c11,
-    output [7:0] c12,
-    output [7:0] c20,
-    output [7:0] c21,
-    output [7:0] c22,
+    output [7:0] M1_out,
+    output [7:0] M2_out,
+    output [7:0] M3_out,
+    output [7:0] M4_out,
+    output [7:0] M5_out,
+    output [7:0] M6_out,
+    output [7:0] M7_out,
+    output [7:0] M8_out,
+    output [7:0] M9_out,
     output reg done
     );
       
@@ -86,15 +86,15 @@ module Matrix(
     wire [7:0] c00to10, c10to20, c01to11, c11to21, c02to12, c12to22; //connections between oolumns    
     
     //doesn't need all outputs for passing to be filled out at the end of rows and columns
-    MAC m_c00(clk, row0Input, col0Input, startMAC[0], c00, r00to01, c00to10);
-    MAC m_c01(clk, r00to01, col1Input, startMAC[1], c01, r01to02, c01to11);
-    MAC m_c02(clk, r01to02, col2Input, startMAC[2], c02, ,c02to12); //doesn't need to pass A
-    MAC m_c10(clk, row1Input, c00to10, startMAC[3], c10, r10to11, c10to20);
-    MAC m_c11(clk, r10to11, c01to11, startMAC[4], c11, r11to12, c11to21); 
-    MAC m_c12(clk, r11to12, c02to12, startMAC[5], c12, , c12to22); //doesn't need to pass A
-    MAC m_c20(clk, row2Input, c10to20, startMAC[6], c20, r20to21, ); //doesn't need to pass B 
-    MAC m_c21(clk, r20to21, c11to21, startMAC[7], c21, r21to22, ); //doesn't need to pass B
-    MAC m_c22(clk, r21to22, c12to22, startMAC[8], c22, ,); //doesn't need to pass A and B
+    MAC m_c00(clk, row0Input, col0Input, startMAC[0], M1_out, r00to01, c00to10);
+    MAC m_c01(clk, r00to01, col1Input, startMAC[1], M2_out, r01to02, c01to11);
+    MAC m_c02(clk, r01to02, col2Input, startMAC[2], M3_out, ,c02to12); //doesn't need to pass A
+    MAC m_c10(clk, row1Input, c00to10, startMAC[3], M4_out, r10to11, c10to20);
+    MAC m_c11(clk, r10to11, c01to11, startMAC[4], M5_out, r11to12, c11to21); 
+    MAC m_c12(clk, r11to12, c02to12, startMAC[5], M6_out, , c12to22); //doesn't need to pass A
+    MAC m_c20(clk, row2Input, c10to20, startMAC[6], M7_out, r20to21, ); //doesn't need to pass B 
+    MAC m_c21(clk, r20to21, c11to21, startMAC[7], M8_out, r21to22, ); //doesn't need to pass B
+    MAC m_c22(clk, r21to22, c12to22, startMAC[8], M9_out, ,); //doesn't need to pass A and B
     
     
     initial begin
@@ -109,10 +109,10 @@ module Matrix(
         slowClk = 0;
         clkCnt = 0;
         wait3Cycles = 0;
-        
+        done = 0;
     end
     
-    always@(posedge slowClk) begin
+    always@(posedge clk) begin
         case(cs)
         0: begin // reset/initial state
             startMAC <= 0;

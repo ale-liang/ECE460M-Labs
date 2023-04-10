@@ -1,6 +1,6 @@
 Vivado Simulator 2020.2
 Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
-Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 67970a1036af490abb4a0b0385d72ce3 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot fp_mult_tb_behav xil_defaultlib.fp_mult_tb xil_defaultlib.glbl -log elaborate.log 
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 67970a1036af490abb4a0b0385d72ce3 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot Systolic_Matrix_tb_behav xil_defaultlib.Systolic_Matrix_tb xil_defaultlib.glbl -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
@@ -9,6 +9,9 @@ Starting simulation data flow analysis
 Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
 Compiling module xil_defaultlib.fp_mult
-Compiling module xil_defaultlib.fp_mult_tb
+Compiling module xil_defaultlib.fp_adder
+Compiling module xil_defaultlib.MAC
+Compiling module xil_defaultlib.Matrix
+Compiling module xil_defaultlib.Systolic_Matrix_tb
 Compiling module xil_defaultlib.glbl
-Built simulation snapshot fp_mult_tb_behav
+Built simulation snapshot Systolic_Matrix_tb_behav
