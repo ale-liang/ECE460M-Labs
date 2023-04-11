@@ -64,18 +64,7 @@ module Matrix(
     reg [7:0] col2Input;
     
     reg [1:0] wait3Cycles;
-    
-    reg [5:0] clkCnt;
-    reg slowClk;
-    
-    always@(posedge clk) begin
-        if(clkCnt == 20) begin
-            slowClk = ~slowClk;
-            clkCnt = 0;
-        end else begin
-            clkCnt = clkCnt + 1;
-        end    
-    end
+
     // MAPPING OUT THE Matrix
     //        c0 c1 c2
     //     r0 00 01 02
@@ -106,13 +95,11 @@ module Matrix(
         col1Input = 0;
         col2Input = 0;
         cs = 0;
-        slowClk = 0;
-        clkCnt = 0;
         wait3Cycles = 0;
         done = 0;
     end
     
-    always@(posedge clk) begin
+    always@(posedge clk) begin     
         case(cs)
         0: begin // reset/initial state
             startMAC <= 0;
@@ -131,6 +118,9 @@ module Matrix(
             end    
         end
         1: begin // begin feeding values into MAC
+            if(reset) begin
+                cs <= 0;
+            end
             row0Input <= a00;
             row1Input <= 0;
             row2Input <= 0;
@@ -141,6 +131,9 @@ module Matrix(
             cs <= 2;
         end
         2: begin
+            if(reset) begin
+                cs <= 0;
+            end
             row0Input <= a01;
             row1Input <= a10;
             row2Input <= 0;
@@ -152,6 +145,9 @@ module Matrix(
             cs <= 3;
         end
         3: begin
+            if(reset) begin
+                cs <= 0;
+            end
             row0Input <= a02;
             row1Input <= a11;
             row2Input <= a20;
@@ -164,6 +160,9 @@ module Matrix(
             cs <= 4;
         end
         4: begin
+            if(reset) begin
+                cs <= 0;
+            end
             row0Input <= 0;
             row1Input <= a12;
             row2Input <= a21;
@@ -175,6 +174,9 @@ module Matrix(
             cs <= 5;
         end
         5: begin
+            if(reset) begin
+                cs <= 0;
+            end
             row0Input <= 0;
             row1Input <= 0;
             row2Input <= a22;
@@ -185,6 +187,9 @@ module Matrix(
             cs <= 6;
         end
         6: begin
+            if(reset) begin
+                cs <= 0;
+            end
             row0Input <= 0;
             row1Input <= 0;
             row2Input <= 0;
@@ -192,7 +197,7 @@ module Matrix(
             col1Input <= 0;
             col2Input <= 0;
             startMAC <= 9'b111111111;
-            cs <= 6;
+            
             if (wait3Cycles == 3) begin
                 cs <= 7;
             end else begin
@@ -201,9 +206,13 @@ module Matrix(
             end
         end
         7: begin
+        
             done <= 1'b1;
             wait3Cycles <= 0;
             startMAC <= 0;
+            if(reset) begin
+                cs <= 0;
+            end
             if(start) begin
                 cs <= 0;
             end else begin
@@ -215,6 +224,7 @@ module Matrix(
             cs <= 0;
         end
     endcase    
+       
     end
     
 endmodule

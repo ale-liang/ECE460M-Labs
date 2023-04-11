@@ -43,24 +43,25 @@ module fp_mult(
     
     
     always @(*) begin
-        if(a == 7'b0 || b == 7'b0) begin 
-            sOut <= 1'b0;
-            eOut <= 4'b0;
-            mOut <= 10'b0;
+        if(a == 8'b0 || b == 8'b0) begin 
+            sOut = 1'b0;
+            eOut = 4'b0;
+            mOut = 10'b0;
             
         end else begin
-            sOut <= a[7] ^ b[7];
-            eOut <= a[6:4] + b[6:4] - 3; //add the exponents together and then -3 due to bias
-            mOut <= mB * mA;
+            sOut = a[7] ^ b[7];
+            eOut = a[6:4] + b[6:4] - 3; //add the exponents together and then -3 due to bias
+            mOut = mB * mA;
             if(mOut[9] == 1'b1) begin
-                mOut <= mOut >> 1;
-                eOut <= eOut + 1;
+                mOut = mOut >> 1;
+                eOut = eOut + 1;
             end else begin
                 for(i = 0; i < 10; i = i + 1) begin
-                    if (mOut[8] != 1'b1) begin
-                        mOut <= mOut << 1;
-                        eOut <= eOut - 1;
+                    if (mOut[8] != 1'b1 && eOut > 4'b0) begin
+                        mOut = mOut << 1;
+                        eOut = eOut - 1;
                     end
+                    
                 end    
             end
         end
