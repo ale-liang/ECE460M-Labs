@@ -40,14 +40,15 @@ module fp_adder(
     
     
     always @(*) begin
-        if(a == 8'b0 || b == 8'b0) begin 
-            sOut = 1'b0;
-            eOut = 4'b0;
-            fOut = 10'b0;
+        eOut = {1'b0, a[6:4]};
+        if(a[6:0] == 7'b0 || b[6:0] == 7'b0) begin 
+            sOut = (a[6:0] == 7'b0) ? b[7] : a[7];
+            eOut = (a[6:0] == 7'b0) ? b[6:4] : a[6:4];
+            fOut = (a[6:0] == 7'b0) ? {1'b0, 1'b1, b[3:0], 4'b0} : {1'b0, 1'b1, a[3:0], 4'b0};
             
         end else begin
-            fA = {1'b0, a[3:0], 5'b0};
-            fB = {1'b0, b[3:0], 5'b0};
+            fA = {1'b0, 1'b1, a[3:0], 4'b0};
+            fB = {1'b0, 1'b1, b[3:0], 4'b0};
             
             //Compare Exponents
             if (a[6:4] > b[6:4]) begin //shift a until expA == expB
@@ -63,34 +64,40 @@ module fp_adder(
                 fOut = fA + fB;
                 sOut = a[7];
             end else if (a[7] == 1) begin //subtract -fractA + fractB
-                fOut = fB + (-fA);
+                fOut = fB + ((-fA)&10'b0111111111);
                 sOut = (fA > fB) ? 1 : 0;
             end else begin //subtract fractA - fractB
-                fOut = fA + (-fB);
+                fOut = fA + ((-fB)&10'b0111111111);
                 sOut = (fB > fA) ? 1 : 0;
             end
             
-            if (fOut == 10'b0) begin //If Result is 0, Set Excponent to 0
-                eOut = 4'b0;
-                sOut = 1'b0;
-            end 
-            
-            //Check for fraction overflow and Normalize Fraction
-            if(fOut[9] == 1'b1) begin
-                fOut = fOut >> 1;
-                eOut = eOut + 1;
+            if ((a[6:4] == b[6:4]) && fOut[8:0] == 9'b0) begin //If Result is 0, Set Exponent Representation
+                if (a[7] ~^ b[7]) begin
+                    eOut = eOut << 1;
+                end else begin
+                    eOut = 4'b0;
+                    sOut = 1'b0;
+                end
             end else begin
-                for(i = 0; i < 10; i = i + 1) begin
-                    if (fOut[8] != 1'b1 && eOut > 4'b0) begin
-                        fOut = fOut << 1;
-                        eOut = eOut - 1;
-                    end
-                end    
+                //Check for fraction overflow and Normalize Fraction
+                if(fOut[9] == 1'b1) begin
+                    fOut = (a[7] ~^ b[7]) ? fOut >> 1 : fOut << 1;
+                    eOut = (a[7] ~^ b[7]) ? eOut + 1 : eOut - 1;
+                end /*else begin
+                    for(i = 0; i < 10; i = i + 1) begin
+                        if (fOut[7] != 1'b1 && eOut > 4'b0) begin
+                            fOut = fOut << 1;
+                            eOut = eOut - 1;
+                        end
+                    end    
+                end*/
             end
+            
         end
+        $display("%b + %b = %b", a, b, {sOut, eOut[2:0], fOut[7:4]});
     end
     
     
-    assign out = {sOut, eOut[2:0], fOut[8:5]};
+    assign out = {sOut, eOut[2:0], fOut[7:4]};
     
 endmodule
