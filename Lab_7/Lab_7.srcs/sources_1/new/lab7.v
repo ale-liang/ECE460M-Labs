@@ -1,5 +1,5 @@
 // You can use this skeleton testbench code, the textbook testbench code, or your own
-module MIPS_Testbench ();
+module MIPS_TestbenchA ();
   reg CLK;
   reg RST;
   reg HALT;
@@ -82,7 +82,7 @@ endmodule
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-module Complete_MIPS(CLK, RST, HALT, reg1);
+module Complete_MIPSA(CLK, RST, HALT, reg1);
   // Will need to be modified to add functionality
   input CLK;
   input RST;

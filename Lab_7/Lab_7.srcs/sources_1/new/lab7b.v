@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 // You can use this skeleton testbench code, the textbook testbench code, or your own
-module MIPS_Testbench ();
+module MIPS_TestbenchB ();
   reg CLK;
   reg RST;
   reg HALT;
@@ -12,6 +12,8 @@ module MIPS_Testbench ();
 
   wire WE_Mux, CS_Mux;
   reg init, WE_TB, CS_TB;
+  
+  
   
   parameter N = 10;
   reg[31:0] expected[N:1];
@@ -30,6 +32,7 @@ module MIPS_Testbench ();
     expected[9] = 32'h00000003; // $9 content=3
     expected[10] = 32'h00412022; // $10 content=5th instr
     CLK = 0;
+    HALT = 0;
     
   end
 
@@ -83,7 +86,7 @@ endmodule
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-module Complete_MIPS(CLK, reg1, btn, an, segs);
+module Complete_MIPSB(CLK, reg1, btn, an, segs);
   // Will need to be modified to add functionality
   input CLK;
 //  output A_Out, D_Out;
