@@ -72,7 +72,8 @@ module MIPS_TestbenchA ();
 
     $display("TEST COMPLETE");
     $stop;
-  end
+  
+  end//always
 
 endmodule
 
@@ -255,7 +256,7 @@ module MIPS (CLK, RST, HALT, CS, WE, ADDR, Mem_Bus, reg1);
 
   //drive memory bus only during writes
   assign ADDR = (fetchDorI)? pc : alu_result_save[6:0]; //ADDR Mux
-  REG Register(CLK, regw, dr, `sr1, `sr2, reg_in, readreg1, readreg2);
+  REG Register(CLK, regw, dr, `sr1, `sr2, reg_in, readreg1, readreg2, reg1);
 
   initial begin
     op = and1; opsave = and1;
