@@ -83,13 +83,14 @@ endmodule
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-module Complete_MIPS(CLK, RST, HALT, reg1);
+module Complete_MIPS(CLK, reg1, btn, an, segs);
   // Will need to be modified to add functionality
   input CLK;
-  input RST;
-  input HALT;
 //  output A_Out, D_Out;
-  output [7:0] reg1;
+  input [2:0] reg1;
+  input btn;
+  output [3:0] an;
+  output [6:0] segs;
 
   wire CS, WE;
   wire [6:0] ADDR;
@@ -98,10 +99,28 @@ module Complete_MIPS(CLK, RST, HALT, reg1);
   wire slowClk;
   clkDivider c0(CLK, slowClk);
   
+  wire [31:0] reg2;
+  
+  wire RST = 0;
+  wire HALT = 0;
 
-  MIPS CPU(slowClk, RST, CS, WE, ADDR, Mem_Bus, reg1);
+  MIPS CPU(slowClk, RST, HALT, CS, WE, ADDR, Mem_Bus, reg1, reg2);
   Memory MEM(CS, WE, CLK, ADDR, Mem_Bus);
-
+  
+  reg [15:0] hex;
+  wire btn0;
+  
+  ButtonDebounce b0(clk, btn, btn0);
+  
+  always @(btn) begin
+    if (btn0 == 1) begin
+        hex = reg2[31:16];
+    end else begin
+        hex = reg2[15:0];
+    end
+  end
+  
+  Display d0 (CLK, hex, an, segs);
 endmodule
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -127,8 +146,9 @@ module Memory(CS, WE, CLK, ADDR, Mem_Bus);
     for(i = 0; i < 128; i = i + 1) begin //initialize memory to 0
         RAM[i] = 0;
     end
-    $readmemh("MIPS_Instructions.mem", RAM); //initial values
-    $readmemb("MIPS_Loop.mem", RAM);
+    //$readmemh("MIPS_Instructions.mem", RAM); //initial values
+    //$readmemb("MIPS_Loop.mem", RAM);
+    $readmemb("MIPSTestPartB.mem", RAM);
     //$readmemh("MIPSTestbenchPartA.mem", RAM);
   end
 
@@ -150,7 +170,7 @@ endmodule
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-module REG(CLK, RegW, DR, SR1, SR2, Reg_In, ReadReg1, ReadReg2, reg1);
+module REG(CLK, RegW, DR, SR1, SR2, Reg_In, ReadReg1, ReadReg2, reg1, reg2);
   input CLK;
   input RegW;
   input [4:0] DR;
@@ -159,7 +179,8 @@ module REG(CLK, RegW, DR, SR1, SR2, Reg_In, ReadReg1, ReadReg2, reg1);
   input [31:0] Reg_In;
   output reg [31:0] ReadReg1;
   output reg [31:0] ReadReg2;
-  output [7:0] reg1;
+  input [2:0] reg1;
+  output [31:0] reg2;
 
   reg [31:0] REG [0:31];
   integer i;
@@ -173,6 +194,7 @@ module REG(CLK, RegW, DR, SR1, SR2, Reg_In, ReadReg1, ReadReg2, reg1);
 
   always @(posedge CLK)
   begin
+    REG[1][31:0] = {29'b0, reg1};
 
     if(RegW == 1'b1)
       REG[DR] <= Reg_In[31:0];
@@ -181,7 +203,7 @@ module REG(CLK, RegW, DR, SR1, SR2, Reg_In, ReadReg1, ReadReg2, reg1);
     ReadReg2 <= REG[SR2];
   end
   
-  assign reg1 = REG[1][7:0];
+  assign reg2 = REG[2][31:0];
 endmodule
 
 
@@ -197,12 +219,13 @@ endmodule
 `define f_code instr[5:0]
 `define numshift instr[10:6]
 
-module MIPS (CLK, RST, HALT, CS, WE, ADDR, Mem_Bus, reg1);
+module MIPS (CLK, RST, HALT, CS, WE, ADDR, Mem_Bus, reg1, reg2);
   input CLK, RST, HALT;
   output reg CS, WE;
   output [6:0] ADDR;
   inout [31:0] Mem_Bus;
-  output [7:0] reg1;
+  input [2:0] reg1;
+  output [31:0] reg2;
 
   //special instructions (opcode == 000000), values of F code (bits 5-0):
   parameter add = 6'b100000;
@@ -226,6 +249,7 @@ module MIPS (CLK, RST, HALT, CS, WE, ADDR, Mem_Bus, reg1);
   parameter j = 6'b000010;
   
   //new instructions
+  
   //j format
   parameter jal = 6'b000011; 
   //i format
@@ -269,7 +293,7 @@ module MIPS (CLK, RST, HALT, CS, WE, ADDR, Mem_Bus, reg1);
 
   //drive memory bus only during writes
   assign ADDR = (fetchDorI)? pc : alu_result_save[6:0]; //ADDR Mux
-  REG Register(CLK, regw, dr, `sr1, `sr2, reg_in, readreg1, readreg2);
+  REG Register(CLK, regw, dr, `sr1, `sr2, reg_in, readreg1, readreg2, reg1, reg2);
 
   initial begin
     op = and1; opsave = and1;
@@ -299,12 +323,12 @@ module MIPS (CLK, RST, HALT, CS, WE, ADDR, Mem_Bus, reg1);
             nstate = 3'd0;
             end
           else if (`opcode == jal) begin //added the jal instruction
-            op = `opcode;
+            op = jal;
             end
         end
-        else if (format == R) //register instructions
+        else if (format == R) begin//register instructions
           op = `f_code;
-        else if (format == I) begin //immediate instructions
+        end else if (format == I) begin //immediate instructions
           reg_or_imm = 1;
           if(`opcode == lw) begin
             op = add;
