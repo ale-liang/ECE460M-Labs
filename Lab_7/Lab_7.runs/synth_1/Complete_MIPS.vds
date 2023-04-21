@@ -1,0 +1,370 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Thu Apr 20 17:57:05 2023
+# Process ID: 16932
+# Current directory: C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_7/Lab_7.runs/synth_1
+# Command line: vivado.exe -log Complete_MIPS.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Complete_MIPS.tcl
+# Log file: C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_7/Lab_7.runs/synth_1/Complete_MIPS.vds
+# Journal file: C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_7/Lab_7.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source Complete_MIPS.tcl -notrace
+Command: synth_design -top Complete_MIPS -part xc7a35tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 5376
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1016.504 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'Complete_MIPS' [C:/Users/Alex/Downloads/lab7.v:85]
+INFO: [Synth 8-6157] synthesizing module 'clkDivider' [C:/Users/Alex/Downloads/lab7.v:368]
+INFO: [Synth 8-6155] done synthesizing module 'clkDivider' (1#1) [C:/Users/Alex/Downloads/lab7.v:368]
+INFO: [Synth 8-6157] synthesizing module 'MIPS' [C:/Users/Alex/Downloads/lab7.v:199]
+	Parameter add bound to: 6'b100000 
+	Parameter sub bound to: 6'b100010 
+	Parameter xor1 bound to: 6'b100110 
+	Parameter and1 bound to: 6'b100100 
+	Parameter or1 bound to: 6'b100101 
+	Parameter slt bound to: 6'b101010 
+	Parameter srl bound to: 6'b000010 
+	Parameter sll bound to: 6'b000000 
+	Parameter jr bound to: 6'b001000 
+	Parameter addi bound to: 6'b001000 
+	Parameter andi bound to: 6'b001100 
+	Parameter ori bound to: 6'b001101 
+	Parameter lw bound to: 6'b100011 
+	Parameter sw bound to: 6'b101011 
+	Parameter beq bound to: 6'b000100 
+	Parameter bne bound to: 6'b000101 
+	Parameter j bound to: 6'b000010 
+	Parameter R bound to: 2'b00 
+	Parameter I bound to: 2'b01 
+	Parameter J bound to: 2'b10 
+INFO: [Synth 8-6157] synthesizing module 'REG' [C:/Users/Alex/Downloads/lab7.v:152]
+INFO: [Synth 8-6155] done synthesizing module 'REG' (2#1) [C:/Users/Alex/Downloads/lab7.v:152]
+WARNING: [Synth 8-7071] port 'reg1' of module 'REG' is unconnected for instance 'Register' [C:/Users/Alex/Downloads/lab7.v:257]
+WARNING: [Synth 8-7023] instance 'Register' of module 'REG' has 9 connections declared, but only 8 given [C:/Users/Alex/Downloads/lab7.v:257]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Alex/Downloads/lab7.v:274]
+INFO: [Synth 8-6155] done synthesizing module 'MIPS' (3#1) [C:/Users/Alex/Downloads/lab7.v:199]
+WARNING: [Synth 8-689] width (7) of port connection 'WE' does not match port width (1) of module 'MIPS' [C:/Users/Alex/Downloads/lab7.v:101]
+WARNING: [Synth 8-689] width (32) of port connection 'ADDR' does not match port width (7) of module 'MIPS' [C:/Users/Alex/Downloads/lab7.v:101]
+WARNING: [Synth 8-7071] port 'reg1' of module 'MIPS' is unconnected for instance 'CPU' [C:/Users/Alex/Downloads/lab7.v:101]
+WARNING: [Synth 8-7023] instance 'CPU' of module 'MIPS' has 8 connections declared, but only 7 given [C:/Users/Alex/Downloads/lab7.v:101]
+INFO: [Synth 8-6157] synthesizing module 'Memory' [C:/Users/Alex/Downloads/lab7.v:112]
+INFO: [Synth 8-3876] $readmem data file 'MIPS_Instructions.mem' is read successfully [C:/Users/Alex/Downloads/lab7.v:129]
+INFO: [Synth 8-3876] $readmem data file 'MIPS_Loop.mem' is read successfully [C:/Users/Alex/Downloads/lab7.v:130]
+INFO: [Synth 8-6155] done synthesizing module 'Memory' (4#1) [C:/Users/Alex/Downloads/lab7.v:112]
+INFO: [Synth 8-6155] done synthesizing module 'Complete_MIPS' (5#1) [C:/Users/Alex/Downloads/lab7.v:85]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1016.504 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1016.504 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1016.504 ; gain = 0.000
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 1016.504 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_7/Lab7PartA.xdc]
+Finished Parsing XDC File [C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_7/Lab7PartA.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_7/Lab7PartA.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/Complete_MIPS_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/Complete_MIPS_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1053.590 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1053.590 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1053.590 ; gain = 37.086
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1053.590 ; gain = 37.086
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 1053.590 ; gain = 37.086
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'MIPS'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE3 |                              000 |                              000
+                  iSTATE |                              001 |                              001
+                 iSTATE0 |                              010 |                              010
+                 iSTATE1 |                              011 |                              011
+                 iSTATE2 |                              100 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'MIPS'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 1053.590 ; gain = 37.086
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   32 Bit       Adders := 1     
+	   3 Input   32 Bit       Adders := 1     
+	   2 Input   28 Bit       Adders := 1     
+	   2 Input    7 Bit       Adders := 2     
++---XORs : 
+	   2 Input     32 Bit         XORs := 1     
++---Registers : 
+	               32 Bit    Registers := 37    
+	               28 Bit    Registers := 1     
+	                7 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+	                1 Bit    Registers := 3     
++---RAMs : 
+	               4K Bit	(128 X 32 bit)          RAMs := 1     
++---Muxes : 
+	   2 Input   32 Bit        Muxes := 4     
+	   9 Input   32 Bit        Muxes := 1     
+	   5 Input   32 Bit        Muxes := 1     
+	   2 Input    7 Bit        Muxes := 2     
+	   5 Input    7 Bit        Muxes := 1     
+	   5 Input    6 Bit        Muxes := 2     
+	   2 Input    6 Bit        Muxes := 1     
+	   4 Input    6 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 1     
+	   9 Input    4 Bit        Muxes := 1     
+	   5 Input    3 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 6     
+	   3 Input    3 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 2     
+	   3 Input    2 Bit        Muxes := 2     
+	   2 Input    1 Bit        Muxes := 45    
+	   4 Input    1 Bit        Muxes := 3     
+	   3 Input    1 Bit        Muxes := 1     
+	   5 Input    1 Bit        Muxes := 7     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[7] with 1st driver pin 'MEMi_81/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[7] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[7] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[8] with 1st driver pin 'MEMi_82/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[8] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[8] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[9] with 1st driver pin 'MEMi_83/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[9] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[9] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[10] with 1st driver pin 'MEMi_84/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[10] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[10] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[11] with 1st driver pin 'MEMi_85/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[11] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[11] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[12] with 1st driver pin 'MEMi_86/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[12] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[12] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[13] with 1st driver pin 'MEMi_87/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[13] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[13] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[14] with 1st driver pin 'MEMi_88/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[14] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[14] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[15] with 1st driver pin 'MEMi_89/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[15] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[15] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[16] with 1st driver pin 'MEMi_90/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[16] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[16] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[17] with 1st driver pin 'MEMi_91/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[17] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[17] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[18] with 1st driver pin 'MEMi_92/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[18] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[18] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[19] with 1st driver pin 'MEMi_93/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[19] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[19] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[20] with 1st driver pin 'MEMi_94/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[20] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[20] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[21] with 1st driver pin 'MEMi_95/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[21] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[21] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[22] with 1st driver pin 'MEMi_96/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[22] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[22] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[23] with 1st driver pin 'MEMi_97/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[23] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[23] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[24] with 1st driver pin 'MEMi_98/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[24] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[24] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[25] with 1st driver pin 'MEMi_99/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[25] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[25] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[26] with 1st driver pin 'MEMi_100/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[26] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[26] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[27] with 1st driver pin 'MEMi_101/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[27] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[27] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[28] with 1st driver pin 'MEMi_102/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[28] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[28] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[29] with 1st driver pin 'MEMi_103/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[29] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[29] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[30] with 1st driver pin 'MEMi_104/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[30] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[30] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[31] with 1st driver pin 'MEMi_105/z' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Mem_Bus[31] with 2nd driver pin 'GND' [C:/Users/Alex/Downloads/lab7.v:112]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Mem_Bus[31] is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Alex/Downloads/lab7.v:112]
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:20 . Memory (MB): peak = 1053.590 ; gain = 37.086
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:21 ; elapsed = 00:00:24 . Memory (MB): peak = 1053.590 ; gain = 37.086
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:24 . Memory (MB): peak = 1053.590 ; gain = 37.086
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:22 ; elapsed = 00:00:24 . Memory (MB): peak = 1063.129 ; gain = 46.625
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1075.184 ; gain = 58.680
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1075.184 ; gain = 58.680
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1075.184 ; gain = 58.680
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1075.184 ; gain = 58.680
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1075.184 ; gain = 58.680
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1075.184 ; gain = 58.680
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     2|
+|2     |CARRY4 |    27|
+|3     |LUT1   |     3|
+|4     |LUT2   |    33|
+|5     |LUT3   |    81|
+|6     |LUT4   |   130|
+|7     |LUT5   |    30|
+|8     |LUT6   |   876|
+|9     |MUXF7  |   256|
+|10    |FDRE   |  1195|
+|11    |IBUF   |     2|
+|12    |OBUFT  |     8|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1075.184 ; gain = 58.680
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 75 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:18 ; elapsed = 00:00:25 . Memory (MB): peak = 1075.184 ; gain = 21.594
+Synthesis Optimization Complete : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 1075.184 ; gain = 58.680
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.020 . Memory (MB): peak = 1085.562 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 283 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+WARNING: [Netlist 29-101] Netlist 'Complete_MIPS' is not ideal for floorplanning, since the cellview 'REG' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1085.562 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Common 17-83] Releasing license: Synthesis
+30 Infos, 7 Warnings, 75 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:29 ; elapsed = 00:00:33 . Memory (MB): peak = 1085.562 ; gain = 69.059
+INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_7/Lab_7.runs/synth_1/Complete_MIPS.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file Complete_MIPS_utilization_synth.rpt -pb Complete_MIPS_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Thu Apr 20 17:57:42 2023...

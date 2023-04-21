@@ -19,7 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
+/*
 module fp_adder(
     input [7:0] a,
     input [7:0] b,
@@ -85,4 +85,119 @@ module fp_adder(
     
     assign out = {sOut, eOut[2:0], fOut[8:5]};
     
+endmodule
+*/
+
+module fp_adder(
+    input [7:0] A,
+    input [7:0] B,
+    output [7:0] Sum
+    );
+    
+    reg sign;
+    reg [2:0] exponent;
+    reg [9:0] fraction; // twos complement addition (ignore the carry bit)
+    reg [9:0] fractionA; // implied 1, fraction, and four zeros for shifts
+    reg [9:0] fractionB;
+    
+    always @(*) begin
+        fractionA = {1'b0, 1'b1, A[3:0], 4'b0}; //zero for overflow plus implied 1
+        fractionB = {1'b0, 1'b1, B[3:0], 4'b0}; //+ fraction + four zeros
+        
+        if((A == 8'b10000000 &&  B == 8'b10000000) || (A == 0 && B == 0) || ((A[7] ^ B[7] == 1) && (A[6:0] == B[6:0]))) begin //sum will = 0
+            exponent = 0;
+            fraction = 0;
+            sign = 0;
+        end
+        else if(A == 0 || A == 8'b10000000) begin //adding zero cases
+            exponent = B[6:4];
+            fraction[7:4] = B[3:0];
+            sign = B[7];
+        end
+        else if(B == 0 || B == 8'b10000000) begin
+            exponent = A[6:4];
+            fraction[7:4] = A[3:0];
+            sign = A[7];
+        end
+        else begin
+            if(A[6:4] < B[6:4]) begin //find smaller exponent to right shift
+                exponent = B[6:4];
+                fractionA = fractionA >> (B[6:4] - A[6:4]);
+            end
+            else begin
+                exponent = A[6:4];
+                fractionB = fractionB >> (A[6:4] - B[6:4]);
+            end
+            
+            if(A[7] == B[7]) begin //check sign bits if they are the same no change
+                sign = A[7];
+            end
+            else begin //if they are different subtract smaller number from bigger number
+                if(fractionA > fractionB) begin
+                    sign = A[7];
+                end
+                else begin
+                    sign = B[7];
+                end
+            end
+            if(A[7] == 1) begin
+                fractionA = ~fractionA + 1;
+            end
+            if(B[7] == 1) begin
+                fractionB = ~fractionB + 1;
+            end
+            
+            fraction = fractionA + fractionB;
+             
+            //checking for fraction overflow
+            if(sign != fraction[9]) begin
+                fraction = fraction >> 1;
+                exponent = exponent + 1;
+                if(sign == 1) begin //if the result is in twos compliemnt flip it back to unsigned
+                    fraction = ~fraction + 1;
+                end
+            end
+            else begin
+                if(sign == 1) begin //if the result is in twos compliemnt flip it back to unsigned
+                    fraction = ~fraction + 1;
+                end
+                //shifting 8 times will guarantee normalization
+                if(fraction[8] != 1'b1 ) begin  
+                    fraction = fraction << 1;
+                    exponent = exponent - 1;
+                end
+                if(fraction[8] != 1'b1) begin  
+                    fraction = fraction << 1;
+                    exponent = exponent - 1;
+                end
+                if(fraction[8] != 1'b1) begin  
+                    fraction = fraction << 1;
+                    exponent = exponent - 1;
+                end
+                if(fraction[8] != 1'b1) begin  
+                    fraction = fraction << 1;
+                    exponent = exponent - 1;
+                end
+                if(fraction[8] != 1'b1) begin  
+                    fraction = fraction << 1;
+                    exponent = exponent - 1;
+                end
+                if(fraction[8] != 1'b1) begin  
+                    fraction = fraction << 1;
+                    exponent = exponent - 1;
+                end
+                if(fraction[8] != 1'b1) begin  
+                    fraction = fraction << 1;
+                    exponent = exponent - 1;
+                end
+                if(fraction[8] != 1'b1) begin  
+                    fraction = fraction << 1;
+                    exponent = exponent - 1;
+                end
+            end
+            
+        end
+    end
+    
+    assign Sum = {sign, exponent[2:0], fraction[7:4]};
 endmodule
