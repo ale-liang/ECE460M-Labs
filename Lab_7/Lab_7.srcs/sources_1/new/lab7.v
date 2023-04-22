@@ -99,7 +99,7 @@ module Complete_MIPSA(CLK, RST, HALT, reg1);
   clkDivider c0(CLK, slowClk);
   
 
-  MIPS CPU(slowClk, RST, CS, WE, ADDR, Mem_Bus, reg1);
+  MIPS CPU(slowClk, RST, HALT, CS, WE, ADDR, Mem_Bus, reg1);
   Memory MEM(CS, WE, CLK, ADDR, Mem_Bus);
 
 endmodule

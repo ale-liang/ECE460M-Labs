@@ -2,11 +2,11 @@
 # Webtalk v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Thu Apr 20 14:57:47 2023
-# Process ID: 19480
+# Start of session at: Fri Apr 21 13:05:00 2023
+# Process ID: 9100
 # Current directory: C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_7/Lab_7.sim/sim_1/behav/xsim
-# Command line: wbtcv.exe -mode batch -source C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_7/Lab_7.sim/sim_1/behav/xsim/xsim.dir/MIPS_Testbench_behav/webtalk/xsim_webtalk.tcl -notrace
+# Command line: wbtcv.exe -mode batch -source C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_7/Lab_7.sim/sim_1/behav/xsim/xsim.dir/MIPS_TestbenchA_behav/webtalk/xsim_webtalk.tcl -notrace
 # Log file: C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_7/Lab_7.sim/sim_1/behav/xsim/webtalk.log
 # Journal file: C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_7/Lab_7.sim/sim_1/behav/xsim\webtalk.jou
 #-----------------------------------------------------------
-source C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_7/Lab_7.sim/sim_1/behav/xsim/xsim.dir/MIPS_Testbench_behav/webtalk/xsim_webtalk.tcl -notrace
+source C:/Users/Alex/Documents/Xilinx/Vivado/ECE460MLabs/Lab_7/Lab_7.sim/sim_1/behav/xsim/xsim.dir/MIPS_TestbenchA_behav/webtalk/xsim_webtalk.tcl -notrace

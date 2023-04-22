@@ -42,6 +42,6 @@ EAStep()
 
 # pre-commands:
 /bin/touch .init_design.begin.rst
-EAStep vivado -log Complete_MIPS.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source Complete_MIPS.tcl -notrace
+EAStep vivado -log Complete_MIPSA.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source Complete_MIPSA.tcl -notrace
 
 

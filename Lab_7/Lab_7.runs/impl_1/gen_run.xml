@@ -1,84 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1682031423">
-  <File Type="BITSTR-BMM" Name="Complete_MIPS_bd.bmm"/>
-  <File Type="OPT-METHODOLOGY-DRC" Name="Complete_MIPS_methodology_drc_opted.rpt"/>
-  <File Type="INIT-TIMING" Name="Complete_MIPS_timing_summary_init.rpt"/>
-  <File Type="ROUTE-PWR" Name="Complete_MIPS_power_routed.rpt"/>
-  <File Type="PA-TCL" Name="Complete_MIPS.tcl"/>
-  <File Type="OPT-TIMING" Name="Complete_MIPS_timing_summary_opted.rpt"/>
-  <File Type="OPT-DCP" Name="Complete_MIPS_opt.dcp"/>
-  <File Type="ROUTE-PWR-SUM" Name="Complete_MIPS_power_summary_routed.pb"/>
-  <File Type="REPORTS-TCL" Name="Complete_MIPS_reports.tcl"/>
-  <File Type="OPT-DRC" Name="Complete_MIPS_drc_opted.rpt"/>
-  <File Type="OPT-HWDEF" Name="Complete_MIPS.hwdef"/>
-  <File Type="PWROPT-DCP" Name="Complete_MIPS_pwropt.dcp"/>
-  <File Type="PWROPT-DRC" Name="Complete_MIPS_drc_pwropted.rpt"/>
-  <File Type="PWROPT-TIMING" Name="Complete_MIPS_timing_summary_pwropted.rpt"/>
-  <File Type="PLACE-DCP" Name="Complete_MIPS_placed.dcp"/>
-  <File Type="PLACE-IO" Name="Complete_MIPS_io_placed.rpt"/>
-  <File Type="PLACE-CLK" Name="Complete_MIPS_clock_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL" Name="Complete_MIPS_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL-PB" Name="Complete_MIPS_utilization_placed.pb"/>
-  <File Type="PLACE-CTRL" Name="Complete_MIPS_control_sets_placed.rpt"/>
-  <File Type="PLACE-SIMILARITY" Name="Complete_MIPS_incremental_reuse_placed.rpt"/>
-  <File Type="PLACE-PRE-SIMILARITY" Name="Complete_MIPS_incremental_reuse_pre_placed.rpt"/>
-  <File Type="PLACE-TIMING" Name="Complete_MIPS_timing_summary_placed.rpt"/>
-  <File Type="POSTPLACE-PWROPT-DCP" Name="Complete_MIPS_postplace_pwropt.dcp"/>
-  <File Type="BG-BIN" Name="Complete_MIPS.bin"/>
-  <File Type="POSTPLACE-PWROPT-TIMING" Name="Complete_MIPS_timing_summary_postplace_pwropted.rpt"/>
-  <File Type="PHYSOPT-DCP" Name="Complete_MIPS_physopt.dcp"/>
-  <File Type="PHYSOPT-DRC" Name="Complete_MIPS_drc_physopted.rpt"/>
-  <File Type="BITSTR-MSK" Name="Complete_MIPS.msk"/>
-  <File Type="PHYSOPT-TIMING" Name="Complete_MIPS_timing_summary_physopted.rpt"/>
-  <File Type="ROUTE-ERROR-DCP" Name="Complete_MIPS_routed_error.dcp"/>
-  <File Type="ROUTE-DCP" Name="Complete_MIPS_routed.dcp"/>
-  <File Type="ROUTE-BLACKBOX-DCP" Name="Complete_MIPS_routed_bb.dcp"/>
-  <File Type="ROUTE-DRC" Name="Complete_MIPS_drc_routed.rpt"/>
-  <File Type="ROUTE-DRC-PB" Name="Complete_MIPS_drc_routed.pb"/>
-  <File Type="ROUTE-DRC-RPX" Name="Complete_MIPS_drc_routed.rpx"/>
-  <File Type="BITSTR-MMI" Name="Complete_MIPS.mmi"/>
-  <File Type="ROUTE-METHODOLOGY-DRC" Name="Complete_MIPS_methodology_drc_routed.rpt"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="Complete_MIPS_methodology_drc_routed.rpx"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="Complete_MIPS_methodology_drc_routed.pb"/>
-  <File Type="ROUTE-PWR-RPX" Name="Complete_MIPS_power_routed.rpx"/>
-  <File Type="ROUTE-STATUS" Name="Complete_MIPS_route_status.rpt"/>
-  <File Type="ROUTE-STATUS-PB" Name="Complete_MIPS_route_status.pb"/>
-  <File Type="ROUTE-TIMINGSUMMARY" Name="Complete_MIPS_timing_summary_routed.rpt"/>
-  <File Type="ROUTE-TIMING-PB" Name="Complete_MIPS_timing_summary_routed.pb"/>
-  <File Type="ROUTE-TIMING-RPX" Name="Complete_MIPS_timing_summary_routed.rpx"/>
-  <File Type="ROUTE-SIMILARITY" Name="Complete_MIPS_incremental_reuse_routed.rpt"/>
-  <File Type="ROUTE-CLK" Name="Complete_MIPS_clock_utilization_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW" Name="Complete_MIPS_bus_skew_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW-PB" Name="Complete_MIPS_bus_skew_routed.pb"/>
-  <File Type="ROUTE-BUS-SKEW-RPX" Name="Complete_MIPS_bus_skew_routed.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-DCP" Name="Complete_MIPS_postroute_physopt.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="Complete_MIPS_postroute_physopt_bb.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="Complete_MIPS_timing_summary_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="Complete_MIPS_timing_summary_postroute_physopted.pb"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="Complete_MIPS_timing_summary_postroute_physopted.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="Complete_MIPS_bus_skew_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="Complete_MIPS_bus_skew_postroute_physopted.pb"/>
-  <File Type="BG-BIT" Name="Complete_MIPS.bit"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="Complete_MIPS_bus_skew_postroute_physopted.rpx"/>
-  <File Type="BITSTR-RBT" Name="Complete_MIPS.rbt"/>
-  <File Type="BITSTR-NKY" Name="Complete_MIPS.nky"/>
-  <File Type="PDI-FILE" Name="Complete_MIPS.pdi"/>
-  <File Type="RCFI_FILE" Name="Complete_MIPS.rcfi"/>
-  <File Type="CFI_FILE" Name="Complete_MIPS.cfi"/>
-  <File Type="RNPI_FILE" Name="Complete_MIPS.rnpi"/>
-  <File Type="NPI_FILE" Name="Complete_MIPS.npi"/>
-  <File Type="RBD_FILE" Name="Complete_MIPS.rbd"/>
+<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1682136599">
+  <File Type="BITSTR-BMM" Name="Complete_MIPSA_bd.bmm"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="Complete_MIPSA_methodology_drc_opted.rpt"/>
+  <File Type="INIT-TIMING" Name="Complete_MIPSA_timing_summary_init.rpt"/>
+  <File Type="ROUTE-PWR" Name="Complete_MIPSA_power_routed.rpt"/>
+  <File Type="PA-TCL" Name="Complete_MIPSA.tcl"/>
+  <File Type="OPT-TIMING" Name="Complete_MIPSA_timing_summary_opted.rpt"/>
+  <File Type="OPT-DCP" Name="Complete_MIPSA_opt.dcp"/>
+  <File Type="ROUTE-PWR-SUM" Name="Complete_MIPSA_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="Complete_MIPSA_reports.tcl"/>
+  <File Type="OPT-DRC" Name="Complete_MIPSA_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="Complete_MIPSA.hwdef"/>
+  <File Type="PWROPT-DCP" Name="Complete_MIPSA_pwropt.dcp"/>
+  <File Type="PWROPT-DRC" Name="Complete_MIPSA_drc_pwropted.rpt"/>
+  <File Type="PWROPT-TIMING" Name="Complete_MIPSA_timing_summary_pwropted.rpt"/>
+  <File Type="PLACE-DCP" Name="Complete_MIPSA_placed.dcp"/>
+  <File Type="PLACE-IO" Name="Complete_MIPSA_io_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="Complete_MIPSA_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="Complete_MIPSA_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="Complete_MIPSA_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="Complete_MIPSA_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="Complete_MIPSA_incremental_reuse_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="Complete_MIPSA_incremental_reuse_pre_placed.rpt"/>
+  <File Type="PLACE-TIMING" Name="Complete_MIPSA_timing_summary_placed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="Complete_MIPSA_postplace_pwropt.dcp"/>
+  <File Type="BG-BIN" Name="Complete_MIPSA.bin"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="Complete_MIPSA_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="Complete_MIPSA_physopt.dcp"/>
+  <File Type="PHYSOPT-DRC" Name="Complete_MIPSA_drc_physopted.rpt"/>
+  <File Type="BITSTR-MSK" Name="Complete_MIPSA.msk"/>
+  <File Type="PHYSOPT-TIMING" Name="Complete_MIPSA_timing_summary_physopted.rpt"/>
+  <File Type="ROUTE-ERROR-DCP" Name="Complete_MIPSA_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="Complete_MIPSA_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="Complete_MIPSA_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="Complete_MIPSA_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="Complete_MIPSA_drc_routed.pb"/>
+  <File Type="ROUTE-DRC-RPX" Name="Complete_MIPSA_drc_routed.rpx"/>
+  <File Type="BITSTR-MMI" Name="Complete_MIPSA.mmi"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="Complete_MIPSA_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="Complete_MIPSA_methodology_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="Complete_MIPSA_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="Complete_MIPSA_power_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="Complete_MIPSA_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="Complete_MIPSA_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="Complete_MIPSA_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="Complete_MIPSA_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="Complete_MIPSA_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-SIMILARITY" Name="Complete_MIPSA_incremental_reuse_routed.rpt"/>
+  <File Type="ROUTE-CLK" Name="Complete_MIPSA_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="Complete_MIPSA_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="Complete_MIPSA_bus_skew_routed.pb"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="Complete_MIPSA_bus_skew_routed.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="Complete_MIPSA_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="Complete_MIPSA_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="Complete_MIPSA_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="Complete_MIPSA_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="Complete_MIPSA_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="Complete_MIPSA_bus_skew_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="Complete_MIPSA_bus_skew_postroute_physopted.pb"/>
+  <File Type="BG-BIT" Name="Complete_MIPSA.bit"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="Complete_MIPSA_bus_skew_postroute_physopted.rpx"/>
+  <File Type="BITSTR-RBT" Name="Complete_MIPSA.rbt"/>
+  <File Type="BITSTR-NKY" Name="Complete_MIPSA.nky"/>
+  <File Type="PDI-FILE" Name="Complete_MIPSA.pdi"/>
+  <File Type="RCFI_FILE" Name="Complete_MIPSA.rcfi"/>
+  <File Type="CFI_FILE" Name="Complete_MIPSA.cfi"/>
+  <File Type="RNPI_FILE" Name="Complete_MIPSA.rnpi"/>
+  <File Type="NPI_FILE" Name="Complete_MIPSA.npi"/>
+  <File Type="RBD_FILE" Name="Complete_MIPSA.rbd"/>
   <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
-  <File Type="BITSTR-LTX" Name="Complete_MIPS.ltx"/>
-  <File Type="BITSTR-SYSDEF" Name="Complete_MIPS.sysdef"/>
-  <File Type="BG-BGN" Name="Complete_MIPS.bgn"/>
-  <File Type="BG-DRC" Name="Complete_MIPS.drc"/>
-  <File Type="RDI-RDI" Name="Complete_MIPS.vdi"/>
+  <File Type="BITSTR-LTX" Name="Complete_MIPSA.ltx"/>
+  <File Type="BITSTR-SYSDEF" Name="Complete_MIPSA.sysdef"/>
+  <File Type="BG-BGN" Name="Complete_MIPSA.bgn"/>
+  <File Type="BG-DRC" Name="Complete_MIPSA.drc"/>
+  <File Type="RDI-RDI" Name="Complete_MIPSA.vdi"/>
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
-    <File Path="$PPRDIR/../../../../../Downloads/lab7.v">
+    <File Path="$PSRCDIR/sources_1/new/lab7b.v">
       <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/lab7.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/ButtonDebounce.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Display.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/HEXto7Seg.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/hex_seven.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -102,10 +141,15 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PPRDIR/MIPSTestPartB.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="Complete_MIPS"/>
-      <Option Name="TopAutoSet" Val="TRUE"/>
+      <Option Name="TopModule" Val="Complete_MIPSA"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
