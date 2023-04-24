@@ -1,90 +1,4 @@
 `timescale 1ns / 1ps
-// You can use this skeleton testbench code, the textbook testbench code, or your own
-module MIPS_TestbenchB ();
-  reg CLK;
-  reg RST;
-  reg HALT;
-  wire CS;
-  wire WE;
-  wire [31:0] Mem_Bus;
-  wire [6:0] Address, Address_Mux, Address_TB;
-  wire [7:0] reg1;
-
-  wire WE_Mux, CS_Mux;
-  reg init, WE_TB, CS_TB;
-  
-  
-  
-  parameter N = 10;
-  reg[31:0] expected[N:1];
-  integer i;  
-
-  initial
-  begin
-    expected[1] = 32'h00000006; // $1 content=6 decimal
-    expected[2] = 32'h00000012; // $2 content=18 decimal
-    expected[3] = 32'h00000018; // $3 content=24 decimal
-    expected[4] = 32'h0000000C; // $4 content=12 decimal
-    expected[5] = 32'h00000002; // $5 content=2
-    expected[6] = 32'h00000016; // $6 content=22 decimal
-    expected[7] = 32'h00000001; // $7 content=1
-    expected[8] = 32'h00000120; // $8 content=288 decimal
-    expected[9] = 32'h00000003; // $9 content=3
-    expected[10] = 32'h00412022; // $10 content=5th instr
-    CLK = 0;
-    HALT = 0;
-    
-  end
-
-  MIPS CPU(CLK, RST, HALT, CS, WE, Address, Mem_Bus, reg1);
-  Memory MEM(CS_Mux, WE_Mux, CLK, Address_Mux, Mem_Bus);
-
-  assign Address_Mux = (init) ? Address_TB : Address;
-  assign WE_Mux = (init) ? WE_TB : WE;
-  assign CS_Mux = (init) ? CS_TB : CS; 
-
-  always
-  begin
-    #5 CLK = !CLK;
-  end
-
-  always
-  begin
-    RST <= 1'b1; //reset the processor
-
-    //Notice that the memory is initialize in the in the memory module not here
-    @(posedge CLK); //initialize instructions
-    init <= 1; CS_TB <= 1; WE_TB <= 1;
-    
-    @(posedge CLK); //resume back to regular operation
-    init <= 0; CS_TB <= 0; WE_TB <= 0;
-    
-    @(posedge CLK);
-    // driving reset low here puts processor in normal operating mode
-    RST = 1'b0;
-
-    for(i = 1; i <= N; i = i + 1) begin   
-        @(posedge WE); //when store is executed
-        @(negedge CLK);
-            if(Mem_Bus != 32'd1) 
-                $display("Output mismatch: got %d, expected %d", Mem_Bus, 32'd1);
-            else
-                $display("#%d correct", i);
-            
-            
-    end 
-
-    $display("TEST COMPLETE");
-    $stop;
-  end
-
-endmodule
-
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
 
 module Complete_MIPSB(CLK, reg1, btn, an, segs);
   // Will need to be modified to add functionality
@@ -104,8 +18,8 @@ module Complete_MIPSB(CLK, reg1, btn, an, segs);
   
   wire [31:0] reg2;
   
-  wire RST = 0;
-  wire HALT = 0;
+  reg RST = 1;
+  reg HALT = 0;
 
   MIPS CPU(slowClk, RST, HALT, CS, WE, ADDR, Mem_Bus, reg1, reg2);
   Memory MEM(CS, WE, CLK, ADDR, Mem_Bus);
@@ -113,10 +27,17 @@ module Complete_MIPSB(CLK, reg1, btn, an, segs);
   reg [15:0] hex;
   wire btn0;
   
-  ButtonDebounce b0(clk, btn, btn0);
+  //ButtonDebounce b0(clk, btn, btn0);
+  assign btn0 = btn;
+  
+  always @(posedge slowClk) begin
+    if (RST) begin
+        RST = 0;
+    end
+  end
   
   always @(btn) begin
-    if (btn0 == 1) begin
+    if (btn0 == 0) begin
         hex = reg2[31:16];
     end else begin
         hex = reg2[15:0];
@@ -314,11 +235,16 @@ module MIPS (CLK, RST, HALT, CS, WE, ADDR, Mem_Bus, reg1, reg2);
     fetchDorI = 0; CS = 0; WE = 0; regw = 0; writing = 0; alu_result = 32'd0;
     npc = pc; op = jr; reg_or_imm = 0; alu_or_mem = 0; nstate = 3'd0;
     case (state)
-      0: begin //fetch
-        npc = pc + 7'd1; CS = 1; nstate = 3'd1;
-        fetchDorI = 1;
+      0: begin //begin
+        if (HALT) begin
+            nstate = 3'd0;
+        end else begin
+            npc = pc + 7'd1; CS = 1; nstate = 3'd1;
+            fetchDorI = 1;
+        end 
       end
       1: begin //decode
+        $display("%b", instr);
         nstate = 3'd2; reg_or_imm = 0; alu_or_mem = 0;
         if (format == J) begin 
           if(`opcode == j) begin //jump, and finish
@@ -430,6 +356,7 @@ module MIPS (CLK, RST, HALT, CS, WE, ADDR, Mem_Bus, reg1, reg2);
 
   always @(posedge CLK) begin
 
+    
     if (RST) begin
       state <= 3'd0;
       pc <= 7'd0;
@@ -468,6 +395,7 @@ module clkDivider(CLK, slowClk); //used for on board usage
   always @ (posedge CLK)
   begin
     if(cnt == 5000000) begin //10 hz, 100 ms 5000000
+    //if(cnt == 50) begin
       cnt <= 1;
       slowClk <= ~slowClk;
     end
